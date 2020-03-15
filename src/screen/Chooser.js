@@ -4,6 +4,7 @@ import {Image, Animated, Easing} from 'react-native';
 import Modal from '../components/Modal';
 
 import {StyleSheet, View, Text, Dimensions} from 'react-native';
+import Header from '../components/Header';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 const barWidth = Dimensions.get('screen').width - 80;
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -23,6 +24,7 @@ class Chooser extends React.Component {
       pressedThird: false,
       pressedForth: false,
       opacity: 1,
+      headerOpacity: 0,
       virus: false,
       modalOpen: false,
     };
@@ -67,36 +69,38 @@ class Chooser extends React.Component {
         virus: true,
       });
       this.handleAnimation(600);
-    }, 5500);
+    }, 5000);
     this._interval = setInterval(() => {
       const {
         pressedFirst,
         pressedSecond,
         opacity,
+        headerOpacity,
         pressedThird,
         pressedForth,
       } = this.state;
       if (opacity > 0 && (pressedFirst || pressedSecond)) {
         this.setState({
           opacity: opacity - 0.04,
+          headerOpacity: headerOpacity + 0.04,
         });
       } else if (pressedFirst) {
         this.animatedValue.stopAnimation();
         clearInterval(this._interval);
         setTimeout(() => {
-          this.props.navigation.navigate('Die');
+          this.props.navigation.navigate('Paper');
         }, 1000);
       } else if (pressedThird) {
         this.animatedValue.stopAnimation();
         clearInterval(this._interval);
         setTimeout(() => {
-          this.props.navigation.navigate('Chooser');
+          this.props.navigation.navigate('Plane');
         }, 1000);
       } else if (pressedForth) {
         this.animatedValue.stopAnimation();
         clearInterval(this._interval);
         setTimeout(() => {
-          this.props.navigation.navigate('Chooser');
+          this.props.navigation.navigate('Home');
         }, 1000);
       }
     }, 50);
@@ -110,13 +114,18 @@ class Chooser extends React.Component {
     return (
       <View style={styles.container}>
         {modalOpen && (
-          <Modal navigation={this.props.navigation} type="Italy" text="You can't cook anything with it" />
+          <Modal
+            navigation={this.props.navigation}
+            type="flour"
+            text="You can't cook anything with it"
+          />
         )}
+        <Header opacity={this.state.headerOpacity} />
         <Image
           style={[styles.bgPicture]}
           source={require('../../assets/images/Vector.png')}
         />
-        <View style={[styles.content]}>
+        <View style={[styles.content, {opacity: this.state.opacity}]}>
           <View style={styles.buttonContainer}>
             <View style={styles.row}>
               <TouchableWithoutFeedback

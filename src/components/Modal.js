@@ -14,6 +14,11 @@ import {
 } from 'react-native';
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
+const images = {
+  flour: {src: require('../../assets/images/soap.png')},
+  lose: {src: require('../../assets/images/sad.png')},
+  gohome: {src: require('../../assets/images/homeBig.png')},
+};
 
 class Header extends React.Component {
   constructor(props) {
@@ -25,13 +30,16 @@ class Header extends React.Component {
     };
   }
   onPress = () => {
-		const {type, navigation} = this.props;
-		this.setState({isModalVisible: false})
-		if (type === 'Italy') navigation.navigate('Die');
+    const {type, navigation} = this.props;
+    this.setState({isModalVisible: false});
+    if (type === 'flour') navigation.navigate('Die');
+    if (type === 'lose') navigation.navigate('Die');
+    if (type === 'gohome') navigation.navigate('Home');
   };
 
   render() {
     const {buttonShadow, pressed} = this.state;
+    const {type, text} = this.props;
     return (
       <View style={{flex: 1}}>
         <Modal isVisible={this.state.isModalVisible}>
@@ -46,18 +54,13 @@ class Header extends React.Component {
                     justifyContent: 'space-around',
                     alignItems: 'center',
                   }}>
-                  <Text style={[styles.text, {marginBottom: 40}]}>
-                    {this.props.text}
-                  </Text>
+                  <Text style={[styles.text, {marginBottom: 40}]}>{text}</Text>
                   <View
                     style={[
                       styles.button,
                       buttonShadow ? styles.noshadow : {},
                     ]}>
-                    <Image
-                      style={styles.icon}
-                      source={require('../../assets/images/soap.png')}
-                    />
+                    <Image style={styles.icon} source={images[type].src} />
                     <Text style={buttonShadow ? styles.grayText : styles.text}>
                       PUSH
                     </Text>
@@ -96,6 +99,16 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
   },
+  noshadow: {
+    borderWidth: 0,
+    borderColor: '#ddd',
+    borderBottomWidth: 0,
+    shadowColor: 'gray',
+    shadowOffset: {width: 0, height: 0},
+    shadowOpacity: 0,
+    shadowRadius: 0,
+    elevation: 0,
+  },
   button: {
     backgroundColor: 'rgb(208, 240, 245)',
     width: screenWidth / 2,
@@ -115,6 +128,11 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginTop: 10,
     marginBottom: 20,
+  },
+  icon: {
+    resizeMode: 'stretch',
+    width: screenWidth/2.5,
+    height: screenWidth/2.5,
   },
   text: {
     fontSize: 25,

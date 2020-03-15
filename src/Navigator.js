@@ -6,13 +6,14 @@ import Index from './screen/Index';
 import Intro from './screen/Intro';
 import Die from './screen/Die';
 import Chooser from './screen/Chooser';
+import Paper from './screen/Paper';
 
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Index" headerMode="none">
+      <Stack.Navigator initialRouteName="Chooser" headerMode="none">
         <Stack.Screen
           options={{animationEnabled: false}}
           name="Index"
@@ -32,6 +33,11 @@ const AppNavigator = () => {
           options={{animationEnabled: false}}
           name="Chooser"
           component={Chooser}
+        />
+        <Stack.Screen
+          options={{animationEnabled: false}}
+          name="Paper"
+          component={Paper}
         />
       </Stack.Navigator>
     </NavigationContainer>

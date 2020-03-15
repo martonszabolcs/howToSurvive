@@ -5,11 +5,7 @@ import {
   StyleSheet,
   View,
   Text,
-  TextInput,
-  TouchableOpacity,
   Dimensions,
-  Picker,
-  Platform,
 } from 'react-native';
 const screenWidth = Math.round(Dimensions.get('window').width);
 
@@ -22,7 +18,7 @@ class Header extends React.Component {
       <View
         style={[
           styles.container,
-          {opacity: this.props.opacity ? this.props.opacity : 1},
+          {opacity: this.props.opacity === 0 || this.props.opacity ? this.props.opacity : 1},
         ]}>
         <View style={styles.content}>
           <Image
