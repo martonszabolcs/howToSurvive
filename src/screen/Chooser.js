@@ -3,7 +3,7 @@ import * as React from 'react';
 import {Image, Animated, Easing} from 'react-native';
 import Modal from '../components/Modal';
 
-import {StyleSheet, View, Text, Dimensions} from 'react-native';
+import {StyleSheet, View, Text, Dimensions, BackHandler} from 'react-native';
 import Header from '../components/Header';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 const barWidth = Dimensions.get('screen').width - 80;
@@ -59,8 +59,13 @@ class Chooser extends React.Component {
       ]),
     ).start();
   };
-
+  handleBackPress = () => {
+    return true;
+  };
+ 
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+
     this.handleAnimation(200);
 
     setTimeout(() => {
@@ -77,34 +82,36 @@ class Chooser extends React.Component {
         pressedThird,
         pressedForth,
       } = this.state;
-      if (opacity > 0 && (pressedFirst || pressedForth || pressedThird )) {
+      if (opacity > 0 && headerOpacity < 1 && (pressedFirst || pressedForth || pressedThird )) {
         this.setState({
-          opacity: opacity - 0.04,
-          headerOpacity: headerOpacity + 0.04,
+          opacity: opacity - 0.08,
+          headerOpacity: headerOpacity + 0.08,
         });
       } else if (pressedFirst) {
         this.animatedValue.stopAnimation();
         clearInterval(this._interval);
         setTimeout(() => {
           this.props.navigation.navigate('Paper');
-        }, 1000);
+        }, 100);
       } else if (pressedThird) {
         this.animatedValue.stopAnimation();
         clearInterval(this._interval);
         setTimeout(() => {
           this.props.navigation.navigate('Plane');
-        }, 1000);
+        }, 100);
       } else if (pressedForth) {
         this.animatedValue.stopAnimation();
         clearInterval(this._intervaal);
         setTimeout(() => {
           this.props.navigation.navigate('Home');
-        }, 1000);
+        }, 100);
       }
     }, 50);
   }
   componentWillUnmount() {
     clearInterval(this._interval);
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
+
   }
 
   render() {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Image, Animated} from 'react-native';
 
-import {StyleSheet, View, Text, Dimensions} from 'react-native';
+import {StyleSheet, View, Text, Dimensions, BackHandler} from 'react-native';
 import Header from '../components/Header';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 const barWidth = Dimensions.get('screen').width - 80;
@@ -21,9 +21,6 @@ class Intro extends React.Component {
 
   _toggleSubview() {
     var toValue = -screenHeight / 4;
-
-    //This will animate the transalteY of the subview between 0 & 100 depending on its current state
-    //100 comes from the style below, which is the height of the subview.
     Animated.spring(this.state.bounceValue, {
       toValue: toValue,
       velocity: 10,
@@ -31,8 +28,13 @@ class Intro extends React.Component {
       friction: 4,
     }).start();
   }
+  handleBackPress = () => {
+    return true;
+  };
 
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    
     setTimeout(() => {
       this.setState({showButton: true});
     }, 500);
@@ -58,6 +60,8 @@ class Intro extends React.Component {
   }
   componentWillUnmount() {
     clearInterval(this._interval);
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
+
   }
 
   render() {
@@ -83,14 +87,16 @@ class Intro extends React.Component {
                 onPressOut={() => this.setState({firstButton: false})}
                 onPress={() => this.setState({pressedFirst: true})}
                 style={[styles.button, firstButton ? styles.noshadow : {}]}>
-                <Text style={firstButton ? styles.grayText : styles.text}>
-                  I
-                </Text>
-                <Text style={firstButton ? styles.grayText : styles.text}>
-                  DON'T
-                </Text>
-                <Text style={firstButton ? styles.grayText : styles.text}>
-                  CARE
+                <Text
+                  style={[
+                    firstButton ? styles.grayText : styles.text,
+                    {
+                      opacity: this.state.pressedSecond
+                        ? 1
+                        : this.state.opacity,
+                    },
+                  ]}>
+                  {'I'} {'\n'} {"DON'T"} {'\n'} {'CARE'}
                 </Text>
               </TouchableWithoutFeedback>
               <TouchableWithoutFeedback
@@ -188,11 +194,15 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 25,
+    backgroundColor: 'transparent',
     color: 'black',
+    textAlign: 'center',
     fontFamily: 'Lato-Bold',
   },
   grayText: {
     fontSize: 25,
+    textAlign: 'center',
+    backgroundColor: 'transparent',
     color: 'gray',
     fontFamily: 'Lato-Bold',
   },

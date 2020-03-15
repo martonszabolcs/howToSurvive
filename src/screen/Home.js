@@ -2,17 +2,15 @@
 import * as React from 'react';
 import {Image, Animated, Easing} from 'react-native';
 import Modal from '../components/Modal';
-import {StyleSheet, View, Text, Dimensions} from 'react-native';
+import {StyleSheet, View, Text, Dimensions, BackHandler} from 'react-native';
 import Header from '../components/Header';
+import { NoFlickerImage } from 'react-native-no-flicker-image';
+
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 const barWidth = Dimensions.get('screen').width - 80;
 const screenHeight = Math.round(Dimensions.get('window').height);
 const screenWidth = Math.round(Dimensions.get('window').width);
-const images = {
-  tv: {src: require('../../assets/images/tv.png')},
-  porn: {src: require('../../assets/images/porn.png')},
-  titanic: {src: require('../../assets/images/titanic.png')},
-};
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -41,7 +39,15 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    this._toggleSubview();
+		this._toggleSubview();
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+		
+	}
+	handleBackPress = () => {
+    return true;
+  };
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
   }
   pressed(type) {
 		if (!this.state.pr){
@@ -54,6 +60,11 @@ class Home extends React.Component {
   }
 
   render() {
+		const images = {
+			tv: {src: require('../../assets/images/tv.png')},
+			porn: {src: require('../../assets/images/porn.png')},
+			titanic: {src: require('../../assets/images/titanic.png')},
+		};
     const {firstBTN, secondBTN, modalOpen, img} = this.state;
     return (
       <View style={styles.container}>
@@ -111,7 +122,7 @@ class Home extends React.Component {
           )}
         </View>
         <View style={styles.gifContainer}>
-          <Animated.Image style={[styles.gif]} source={images[img].src} />
+          <NoFlickerImage style={[styles.gif]} source={images[img].src} />
         </View>
       </View>
     );

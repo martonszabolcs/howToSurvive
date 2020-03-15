@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Image, Animated} from 'react-native';
 
-import {StyleSheet, View, Text, Dimensions} from 'react-native';
+import {StyleSheet, View, Text, Dimensions, BackHandler} from 'react-native';
 import Header from '../components/Header';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 const barWidth = Dimensions.get('screen').width - 80;
@@ -28,9 +28,18 @@ class Die extends React.Component {
       friction: 4,
     }).start();
   }
+  handleBackPress = () => {
+    return true;
+  };
+  
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
+  }
 
   componentDidMount() {
     this._toggleSubview();
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+
   }
 
   render() {

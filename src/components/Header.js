@@ -1,12 +1,7 @@
 import * as React from 'react';
 import {Image} from 'react-native';
 
-import {
-  StyleSheet,
-  View,
-  Text,
-  Dimensions,
-} from 'react-native';
+import {StyleSheet, View, Text, Dimensions} from 'react-native';
 const screenWidth = Math.round(Dimensions.get('window').width);
 
 class Header extends React.Component {
@@ -18,14 +13,21 @@ class Header extends React.Component {
       <View
         style={[
           styles.container,
-          {opacity: this.props.opacity === 0 || this.props.opacity ? this.props.opacity : 1},
+          {
+            opacity:
+              this.props.opacity === 0 || this.props.opacity
+                ? this.props.opacity
+                : 1,
+          },
         ]}>
         <View style={styles.content}>
           <Image
             style={styles.image}
             source={require('../../assets/images/bacteria.png')}
           />
-          <Text style={styles.text}>{"How to survive"} {"\n"} {"a virus"}</Text>
+          <Text style={styles.text}>
+            {'How to survive'} {'\n'} {'a virus'}
+          </Text>
         </View>
       </View>
     );

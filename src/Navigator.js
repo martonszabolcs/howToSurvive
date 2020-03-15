@@ -16,34 +16,34 @@ const Stack = createStackNavigator();
 const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home" headerMode="none">
+      <Stack.Navigator initialRouteName="Chooser" cardStyle = { {opacity: 1} } headerMode="none">
         <Stack.Screen
-          options={{animationEnabled: false}}
+          options={{animationEnabled: false, disableBack: true}}
           name="Index"
           component={Index}
         />
         <Stack.Screen
-          options={{animationEnabled: false}}
+          options={{animationEnabled: false, disableBack: true}}
           name="Intro"
           component={Intro}
         />
         <Stack.Screen
-          options={{animationEnabled: false}}
+          options={{animationEnabled: false, disableBack: true}}
           name="Die"
           component={Die}
         />
         <Stack.Screen
-          options={{animationEnabled: false}}
+          options={{animationEnabled: false, disableBack: true}}
           name="Chooser"
           component={Chooser}
         />
         <Stack.Screen
-          options={{animationEnabled: false}}
+          options={{animationEnabled: false, disableBack: true}}
           name="Paper"
           component={Paper}
         />
         <Stack.Screen
-          options={{animationEnabled: false}}
+          options={{animationEnabled: false, disableBack: true}}
           name="Plane"
           component={Plane}
         />

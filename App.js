@@ -4,7 +4,7 @@ import {Provider} from 'react-redux';
 import {applyMiddleware, createStore} from 'redux';
 import thunk from 'redux-thunk';
 import AppNavigator from './src/Navigator';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {SafeAreaView, StyleSheet, StatusBar, BackHandler} from 'react-native';
 
 import rootReducer from './src/redux/reducers/index';
 const middlewares = [thunk];
@@ -15,9 +15,19 @@ const store = createStoreWithMiddleware(
 );
 
 class App extends Component {
+  handleBackPress = () => {
+    return true;
+  };
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+  }
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
+  }
   render() {
     return (
       <SafeAreaView style={styles.container}>
+        <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Provider store={store}>
           <AppNavigator />
         </Provider>
@@ -28,7 +38,7 @@ class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
 });
 

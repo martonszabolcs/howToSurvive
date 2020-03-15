@@ -2,7 +2,7 @@
 import * as React from 'react';
 import {Image, Animated, Easing} from 'react-native';
 import Modal from '../components/Modal';
-import {StyleSheet, View, Text, Dimensions} from 'react-native';
+import {StyleSheet, View, Text, Dimensions,BackHandler} from 'react-native';
 import Header from '../components/Header';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 const barWidth = Dimensions.get('screen').width - 80;
@@ -64,10 +64,17 @@ class Paper extends React.Component {
 
   componentDidMount() {
     this.handleAnimation(600);
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+
   }
   componentWillUnmount() {
     clearInterval(this._interval);
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
+
   }
+  handleBackPress = () => {
+    return true;
+  };
 
   pressed() {
     this.animatedValue.stopAnimation();

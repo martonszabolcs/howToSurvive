@@ -2,7 +2,7 @@
 import * as React from 'react';
 import {Image, Animated, Easing} from 'react-native';
 import Modal from '../components/Modal';
-import {StyleSheet, View, Text, Dimensions} from 'react-native';
+import {StyleSheet, View, Text, Dimensions,BackHandler} from 'react-native';
 import Header from '../components/Header';
 import WheelOfFortune from '../components/react-native-wheel-of-fortune';
 
@@ -40,8 +40,15 @@ class Plane extends React.Component {
     this.animatedValue = new Animated.Value(0);
   }
 
-  componentDidMount() {}
-
+	handleBackPress = () => {
+    return true;
+  };
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+  }
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
+  }
   pressed() {
     this.animatedValue.stopAnimation();
     if (Math.random() >= 0.5) {
