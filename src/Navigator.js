@@ -5,13 +5,14 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Index from './screen/Index';
 import Intro from './screen/Intro';
 import Die from './screen/Die';
+import Chooser from './screen/Chooser';
 
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Intro" headerMode="none">
+      <Stack.Navigator initialRouteName="Index" headerMode="none">
         <Stack.Screen
           options={{animationEnabled: false}}
           name="Index"
@@ -26,6 +27,11 @@ const AppNavigator = () => {
           options={{animationEnabled: false}}
           name="Die"
           component={Die}
+        />
+        <Stack.Screen
+          options={{animationEnabled: false}}
+          name="Chooser"
+          component={Chooser}
         />
       </Stack.Navigator>
     </NavigationContainer>

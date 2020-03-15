@@ -14,11 +14,10 @@ import {
 const screenWidth = Math.round(Dimensions.get('window').width);
 
 class Header extends React.Component {
-	constructor(props){
-		super(props)
-	}
+  constructor(props) {
+    super(props);
+  }
   render() {
-		console.log(this.props)
     return (
       <View
         style={[

@@ -40,6 +40,7 @@ class Index extends React.Component {
           thirdColor: thirdColor > 244 ? thirdColor : thirdColor + 4,
         });
       } else {
+        clearInterval(this._interval);
         this.props.navigation.navigate('Intro');
       }
     }, 50);

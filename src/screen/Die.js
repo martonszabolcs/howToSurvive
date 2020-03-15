@@ -9,9 +9,12 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 const screenWidth = Math.round(Dimensions.get('window').width);
 
 class Die extends React.Component {
-  state = {
+  constructor(props){
+    super(props)
+  this.state = {
     bounceValue: new Animated.Value(screenHeight),
   };
+  }
 
   _toggleSubview() {
     var toValue = -screenHeight / 4;
@@ -20,7 +23,7 @@ class Die extends React.Component {
     //100 comes from the style below, which is the height of the subview.
     Animated.spring(this.state.bounceValue, {
       toValue: toValue,
-      velocity: -10000,
+      velocity: 0,
       tension: 20,
       friction: 4,
     }).start();
@@ -31,6 +34,8 @@ class Die extends React.Component {
   }
 
   render() {
+    console.log(this.props)
+    console.log(this.state)
     return (
       <View style={styles.container}>
         <Animated.Image
