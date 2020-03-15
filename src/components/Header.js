@@ -25,7 +25,7 @@ class Header extends React.Component {
             style={styles.image}
             source={require('../../assets/images/bacteria.png')}
           />
-          <Text style={styles.text}>How to survive the Coronavirus</Text>
+          <Text style={styles.text}>{"How to survive"} {"\n"} {"a virus"}</Text>
         </View>
       </View>
     );

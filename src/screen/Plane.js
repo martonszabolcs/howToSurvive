@@ -4,10 +4,24 @@ import {Image, Animated, Easing} from 'react-native';
 import Modal from '../components/Modal';
 import {StyleSheet, View, Text, Dimensions} from 'react-native';
 import Header from '../components/Header';
+import WheelOfFortune from '../components/react-native-wheel-of-fortune';
+
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 const barWidth = Dimensions.get('screen').width - 80;
 const screenHeight = Math.round(Dimensions.get('window').height);
 const screenWidth = Math.round(Dimensions.get('window').width);
+const rewards = [
+  'WIN',
+  'LOSE',
+  'WIN',
+  'LOSE',
+  'WIN',
+  'LOSE',
+  'WIN',
+  'LOSE',
+  'WIN',
+  'LOSE',
+];
 
 class Plane extends React.Component {
   constructor(props) {
@@ -16,50 +30,17 @@ class Plane extends React.Component {
       showButton: false,
       firstBTN: false,
       secondBTN: false,
+      pressedSecond: false,
       type: '',
       desc: '',
       modalOpen: false,
       hideBTN: false,
+      winnerValue: '',
     };
     this.animatedValue = new Animated.Value(0);
   }
 
-  handleAnimation = p => {
-    // A loop is needed for continuous animation
-    Animated.loop(
-      // Animation consists of a sequence of steps
-      Animated.sequence([
-        // start rotation in one direction (only half the time is needed)
-        Animated.timing(this.animatedValue, {
-          toValue: 1.0,
-          duration: p,
-          easing: Easing.linear,
-          useNativeDriver: true,
-        }),
-        // rotate in other direction, to minimum value (= twice the duration of above)
-        Animated.timing(this.animatedValue, {
-          toValue: -1.0,
-          duration: p,
-          easing: Easing.linear,
-          useNativeDriver: true,
-        }),
-        // return to begin position
-        Animated.timing(this.animatedValue, {
-          toValue: 0.0,
-          duration: p,
-          easing: Easing.linear,
-          useNativeDriver: true,
-        }),
-      ]),
-    ).start();
-  };
-
-  componentDidMount() {
-    this.handleAnimation(600);
-  }
-  componentWillUnmount() {
-    clearInterval(this._interval);
-  }
+  componentDidMount() {}
 
   pressed() {
     this.animatedValue.stopAnimation();
@@ -68,14 +49,14 @@ class Plane extends React.Component {
         modalOpen: true,
         hideBTN: true,
         type: 'lose',
-        desc: 'It’s an empty shop',
+        desc: 'The airport is closed',
       });
     } else {
       this.setState({
         modalOpen: true,
         hideBTN: true,
         type: 'gohome',
-        desc: 'Lucky, You have Plane. Go home!',
+        desc: 'Lucky, You have plane. Go home!',
       });
     }
   }
@@ -103,24 +84,59 @@ class Plane extends React.Component {
                 onPressIn={() => this.setState({firstBTN: true})}
                 onPressOut={() => this.setState({firstBTN: false})}
                 onPress={() => this.pressed()}
+                disabled={this.state.pressedSecond}
                 style={[styles.button, firstBTN ? styles.noshadow : {}]}>
-                <Image style={styles.icon} source={require('../../assets/images/plane.png')} />
-								<Text style={firstBTN ? styles.grayText : styles.text}>
-								GO BACK HOME
-                </Text></TouchableWithoutFeedback>
+                <Image
+                  style={styles.icon}
+                  source={require('../../assets/images/plane.png')}
+                />
+                <Text style={firstBTN ? styles.grayText : styles.text}>
+                  GO BACK HOME
+                </Text>
+              </TouchableWithoutFeedback>
               <TouchableWithoutFeedback
                 onPressIn={() => this.setState({secondBTN: true})}
                 onPressOut={() => this.setState({secondBTN: false})}
-                onPressOut={() => this.pressed()}
+                onPressOut={() => {
+                  this.setState({pressedSecond: true});
+                  this.child._onPress();
+                }}
                 style={[styles.button, secondBTN ? styles.noshadow : {}]}>
-                <Image style={styles.icon} source={require('../../assets/images/round.png')} />
-								<Text style={secondBTN ? styles.grayText : styles.text}>
+                <Image
+                  style={styles.icon}
+                  source={require('../../assets/images/round.png')}
+                />
+                <Text style={secondBTN ? styles.grayText : styles.text}>
                   LET'S PLAY
-                </Text></TouchableWithoutFeedback>
+                </Text>
+              </TouchableWithoutFeedback>
             </View>
           )}
           <View style={styles.gifContainer}>
-            
+            <WheelOfFortune
+              onRef={ref => (this.child = ref)}
+              rewards={rewards}
+              knobSize={20}
+              borderWidth={1}
+              borderColor={'transparent'}
+              innerRadius={50}
+              backgroundColor={'white'}
+              getWinner={(value, index) => {
+                this.setState({winnerValue: value});
+                setTimeout(() => {
+                  if (value === 'WIN') {
+                    this.props.navigation.navigate('Home');
+                  } else {
+                    this.props.navigation.navigate('Die');
+                  }
+                }, 2000);
+              }}
+            />
+            {this.state.winnerValue !== '' && (
+              <Text style={[styles.text, {position: 'absolute', fontSize: 50}]}>
+                {this.state.winnerValue}
+              </Text>
+            )}
           </View>
         </View>
       </View>
@@ -213,7 +229,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Lato-Bold',
   },
   gifContainer: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     width: screenWidth,
