@@ -8,13 +8,15 @@ import Die from './screen/Die';
 import Chooser from './screen/Chooser';
 import Paper from './screen/Paper';
 import Plane from './screen/Plane';
+import Home from './screen/Home';
+import Win from './screen/Win';
 
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Chooser" headerMode="none">
+      <Stack.Navigator initialRouteName="Home" headerMode="none">
         <Stack.Screen
           options={{animationEnabled: false}}
           name="Index"
@@ -44,6 +46,16 @@ const AppNavigator = () => {
           options={{animationEnabled: false}}
           name="Plane"
           component={Plane}
+        />
+        <Stack.Screen
+          options={{animationEnabled: false}}
+          name="Home"
+          component={Home}
+        />
+        <Stack.Screen
+          options={{animationEnabled: false}}
+          name="Win"
+          component={Win}
         />
       </Stack.Navigator>
     </NavigationContainer>

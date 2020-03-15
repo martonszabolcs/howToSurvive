@@ -16,6 +16,7 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 const images = {
   flour: {src: require('../../assets/images/soap.png')},
+  home: {src: require('../../assets/images/soap.png')},
   lose: {src: require('../../assets/images/sad.png')},
   gohome: {src: require('../../assets/images/homeBig.png')},
 };
@@ -35,11 +36,12 @@ class Header extends React.Component {
     if (type === 'flour') navigation.navigate('Die');
     if (type === 'lose') navigation.navigate('Die');
     if (type === 'gohome') navigation.navigate('Home');
+    if (type === 'home') navigation.navigate('Win');
   };
 
   render() {
     const {buttonShadow, pressed} = this.state;
-    const {type, text} = this.props;
+    const {type, text, color} = this.props;
     return (
       <View style={{flex: 1}}>
         <Modal isVisible={this.state.isModalVisible}>
@@ -59,6 +61,7 @@ class Header extends React.Component {
                     style={[
                       styles.button,
                       buttonShadow ? styles.noshadow : {},
+                      color ? {backgroundColor: color} : {}
                     ]}>
                     <Image style={styles.icon} source={images[type].src} />
                     <Text style={buttonShadow ? styles.grayText : styles.text}>
