@@ -8,16 +8,8 @@ import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 const barWidth = Dimensions.get('screen').width - 80;
 const screenHeight = Math.round(Dimensions.get('window').height);
 const screenWidth = Math.round(Dimensions.get('window').width);
-var first = '';
-var second = '';
-if (Math.random() >= 0.5) {
-  first = require('../../assets/images/shop1.png');
-  second = require('../../assets/images/shop2.png');
-} else {
-  first = require('../../assets/images/shop2.png');
-  second = require('../../assets/images/shop1.png');
-}
-class Paper extends React.Component {
+
+class Plane extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -83,7 +75,7 @@ class Paper extends React.Component {
         modalOpen: true,
         hideBTN: true,
         type: 'gohome',
-        desc: 'Lucky, You have paper. Go home!',
+        desc: 'Lucky, You have Plane. Go home!',
       });
     }
   }
@@ -112,34 +104,23 @@ class Paper extends React.Component {
                 onPressOut={() => this.setState({firstBTN: false})}
                 onPress={() => this.pressed()}
                 style={[styles.button, firstBTN ? styles.noshadow : {}]}>
-                <Image style={styles.icon} source={first} />
-              </TouchableWithoutFeedback>
+                <Image style={styles.icon} source={require('../../assets/images/plane.png')} />
+								<Text style={firstBTN ? styles.grayText : styles.text}>
+								GO BACK HOME
+                </Text></TouchableWithoutFeedback>
               <TouchableWithoutFeedback
                 onPressIn={() => this.setState({secondBTN: true})}
                 onPressOut={() => this.setState({secondBTN: false})}
                 onPressOut={() => this.pressed()}
                 style={[styles.button, secondBTN ? styles.noshadow : {}]}>
-                <Image style={styles.icon} source={second} />
-              </TouchableWithoutFeedback>
+                <Image style={styles.icon} source={require('../../assets/images/round.png')} />
+								<Text style={secondBTN ? styles.grayText : styles.text}>
+                  LET'S PLAY
+                </Text></TouchableWithoutFeedback>
             </View>
           )}
           <View style={styles.gifContainer}>
-            <Animated.Image
-              style={[
-                styles.gif,
-                {
-                  transform: [
-                    {
-                      rotate: this.animatedValue.interpolate({
-                        inputRange: [-1, 1],
-                        outputRange: ['-0.1rad', '0.1rad'],
-                      }),
-                    },
-                  ],
-                },
-              ]}
-              source={require('../../assets/images/paperBig.png')}
-            />
+            
           </View>
         </View>
       </View>
@@ -240,4 +221,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Paper;
+export default Plane;

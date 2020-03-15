@@ -20,7 +20,6 @@ class Chooser extends React.Component {
       thirdBTN: false,
       forthBTN: false,
       pressedFirst: false,
-      pressedSecond: false,
       pressedThird: false,
       pressedForth: false,
       opacity: 1,
@@ -73,13 +72,12 @@ class Chooser extends React.Component {
     this._interval = setInterval(() => {
       const {
         pressedFirst,
-        pressedSecond,
         opacity,
         headerOpacity,
         pressedThird,
         pressedForth,
       } = this.state;
-      if (opacity > 0 && (pressedFirst || pressedSecond)) {
+      if (opacity > 0 && (pressedFirst || pressedForth || pressedThird )) {
         this.setState({
           opacity: opacity - 0.04,
           headerOpacity: headerOpacity + 0.04,
@@ -98,7 +96,7 @@ class Chooser extends React.Component {
         }, 1000);
       } else if (pressedForth) {
         this.animatedValue.stopAnimation();
-        clearInterval(this._interval);
+        clearInterval(this._intervaal);
         setTimeout(() => {
           this.props.navigation.navigate('Home');
         }, 1000);
@@ -163,10 +161,10 @@ class Chooser extends React.Component {
                 style={[styles.button, thirdBTN ? styles.noshadow : {}]}>
                 <Image
                   style={styles.icon}
-                  source={require('../../assets/images/italy.png')}
+                  source={require('../../assets/images/plane.png')}
                 />
                 <Text style={thirdBTN ? styles.grayText : styles.text}>
-                  Airplane ticket to Italy
+                  Airplane ticket
                 </Text>
               </TouchableWithoutFeedback>
               <TouchableWithoutFeedback

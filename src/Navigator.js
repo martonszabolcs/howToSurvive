@@ -7,6 +7,7 @@ import Intro from './screen/Intro';
 import Die from './screen/Die';
 import Chooser from './screen/Chooser';
 import Paper from './screen/Paper';
+import Plane from './screen/Plane';
 
 const Stack = createStackNavigator();
 
@@ -38,6 +39,11 @@ const AppNavigator = () => {
           options={{animationEnabled: false}}
           name="Paper"
           component={Paper}
+        />
+        <Stack.Screen
+          options={{animationEnabled: false}}
+          name="Plane"
+          component={Plane}
         />
       </Stack.Navigator>
     </NavigationContainer>
