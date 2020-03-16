@@ -15,17 +15,17 @@ const barWidth = Dimensions.get('screen').width - 80;
 const screenHeight = Math.round(Dimensions.get('window').height);
 const screenWidth = Math.round(Dimensions.get('window').width);
 
-class Die extends React.Component {
+class End extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bounceValue: new Animated.Value(-screenHeight),
-      opacity: 1,
+			bounceValue: new Animated.Value(-screenHeight),
+			opacity: 1
     };
   }
 
   _toggleSubview() {
-    var toValue = -screenHeight / 4;
+    var toValue = 0;
 
     //This will animate the transalteY of the subview between 0 & 100 depending on its current state
     //100 comes from the style below, which is the height of the subview.
@@ -52,42 +52,33 @@ class Die extends React.Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
+    this._toggleSubview();
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+		setTimeout(() => {
       this._interval = setInterval(() => {
         this.setState({opacity: this.state.opacity - 0.08});
       }, 100);
       setTimeout(() => {
         this.state.bounceValue.stopAnimation();
         clearInterval(this._intervaal);
-        this.props.navigation.navigate('End');
+        this.props.navigation.navigate('Donate');
       }, 2000);
     }, 2000);
-    this._toggleSubview();
-    BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-  }
+	}
 
   render() {
     return (
-      <View style={[styles.container]}>
+      <View style={[styles.container, {opacity: this.state.opacity}]}>
         <Animated.Image
           style={[
             styles.bgPicture,
-            {
-              opacity: this.state.opacity,
-              transform: [{translateY: this.state.bounceValue}],
-            },
+            {transform: [{translateY: this.state.bounceValue}]},
           ]}
-          source={require('../../assets/images/die.png')}
+          source={require('../../assets/images/win.png')}
         />
-        <Text style={styles.text}>RIP</Text>
-        {this.state.opacity > 0.9 && (
-          <View style={[styles.content, {opacity: this.state.opacity}]}>
-            <Image
-              style={styles.gif}
-              source={require('../../assets/images/run.gif')}
-            />
-          </View>
-        )}
+        <Text style={styles.text}>
+          I’m looking for a new job but I still develop this game.LOL{' '}
+        </Text>
       </View>
     );
   }
@@ -97,58 +88,11 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'rgb(208, 240, 245)',
     flex: 1,
+    padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  content: {
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    width: barWidth,
-    marginTop: screenHeight / 5,
-    flex: 1,
-    zIndex: 1,
-  },
-  button: {
-    backgroundColor: 'rgb(208, 240, 245)',
-    width: screenWidth / 3.5,
-    borderRadius: 20,
-    height: screenWidth / 2.5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderBottomWidth: 0,
-    shadowColor: 'gray',
-    shadowOffset: {width: 0, height: 4},
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    elevation: 1,
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  noshadow: {
-    borderWidth: 0,
-    borderColor: '#ddd',
-    borderBottomWidth: 0,
-    shadowColor: 'gray',
-    shadowOffset: {width: 0, height: 0},
-    shadowOpacity: 0,
-    shadowRadius: 0,
-    elevation: 0,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  gif: {
-    resizeMode: 'cover',
-    width: '100%',
-    height: '88%',
-    zIndex: -1,
-  },
+
   bgPicture: {
     resizeMode: 'cover',
     alignSelf: 'center',
@@ -158,7 +102,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   text: {
-    fontSize: 50,
+    fontSize: screenHeight / 11,
     zIndex: 10,
     marginTop: 60,
     color: 'black',
@@ -166,4 +110,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Die;
+export default End;

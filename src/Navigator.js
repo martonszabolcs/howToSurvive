@@ -10,17 +10,24 @@ import Paper from './screen/Paper';
 import Plane from './screen/Plane';
 import Home from './screen/Home';
 import Win from './screen/Win';
+import End from './screen/End';
+import Donate from './screen/Donate';
 
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Chooser" cardStyle = { {opacity: 1} } headerMode="none">
+      <Stack.Navigator initialRouteName="Index" cardStyle = { {opacity: 1} } headerMode="none">
         <Stack.Screen
           options={{animationEnabled: false, disableBack: true}}
           name="Index"
           component={Index}
+        />
+          <Stack.Screen
+          options={{animationEnabled: false}}
+          name="Win"
+          component={Win}
         />
         <Stack.Screen
           options={{animationEnabled: false, disableBack: true}}
@@ -54,9 +61,15 @@ const AppNavigator = () => {
         />
         <Stack.Screen
           options={{animationEnabled: false}}
-          name="Win"
-          component={Win}
+          name="End"
+          component={End}
         />
+        <Stack.Screen
+          options={{animationEnabled: false}}
+          name="Donate"
+          component={Donate}
+        />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

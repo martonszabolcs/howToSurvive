@@ -3,7 +3,7 @@ import * as React from 'react';
 import {Image, Animated, Easing} from 'react-native';
 import Modal from '../components/Modal';
 
-import {StyleSheet, View, Text, Dimensions, BackHandler} from 'react-native';
+import {StyleSheet, View, Text, Dimensions, BackHandler,ToastAndroid} from 'react-native';
 import Header from '../components/Header';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 const barWidth = Dimensions.get('screen').width - 80;
@@ -26,6 +26,9 @@ class Chooser extends React.Component {
       headerOpacity: 0,
       virus: false,
       modalOpen: false,
+      firstColor: 208,
+      secondColor: 240,
+      thirdColor: 245,
     };
     this.animatedValue = new Animated.Value(0);
   }
@@ -60,9 +63,14 @@ class Chooser extends React.Component {
     ).start();
   };
   handleBackPress = () => {
+    ToastAndroid.showWithGravity(
+      "Don't cheat! 🙃",
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER,
+    );
     return true;
   };
- 
+
   componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
 
@@ -81,8 +89,15 @@ class Chooser extends React.Component {
         headerOpacity,
         pressedThird,
         pressedForth,
+        firstColor,
+        secondColor,
+        thirdColor,
       } = this.state;
-      if (opacity > 0 && headerOpacity < 1 && (pressedFirst || pressedForth || pressedThird )) {
+      if (
+        opacity > 0 &&
+        headerOpacity < 1 &&
+        (pressedFirst || pressedForth || pressedThird)
+      ) {
         this.setState({
           opacity: opacity - 0.08,
           headerOpacity: headerOpacity + 0.08,
@@ -90,34 +105,47 @@ class Chooser extends React.Component {
       } else if (pressedFirst) {
         this.animatedValue.stopAnimation();
         clearInterval(this._interval);
-        setTimeout(() => {
-          this.props.navigation.navigate('Paper');
-        }, 100);
+        this.props.navigation.navigate('Paper');
       } else if (pressedThird) {
         this.animatedValue.stopAnimation();
         clearInterval(this._interval);
-        setTimeout(() => {
-          this.props.navigation.navigate('Plane');
-        }, 100);
+        this.props.navigation.navigate('Plane');
       } else if (pressedForth) {
-        this.animatedValue.stopAnimation();
-        clearInterval(this._intervaal);
-        setTimeout(() => {
+        if (firstColor > 125 || secondColor > 200 || thirdColor > 173) {
+          this.setState({
+            firstColor: firstColor < 124 ? firstColor : firstColor - 4,
+            secondColor: secondColor < 199 ? secondColor : secondColor - 4,
+            thirdColor: thirdColor < 172 ? thirdColor : thirdColor - 4,
+          });
+        } else {
+          this.animatedValue.stopAnimation();
+          clearInterval(this._intervaal);
           this.props.navigation.navigate('Home');
-        }, 100);
+        }
       }
     }, 50);
   }
   componentWillUnmount() {
     clearInterval(this._interval);
+    this.animatedValue.stopAnimation();
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
-
+  }
+  changeColor() {
+    return (
+      'rgb(' +
+      this.state.firstColor +
+      ', ' +
+      this.state.secondColor +
+      ', ' +
+      this.state.thirdColor +
+      ')'
+    );
   }
 
   render() {
     const {firstBTN, secondBTN, thirdBTN, forthBTN, modalOpen} = this.state;
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor: this.changeColor()}]}>
         {modalOpen && (
           <Modal
             navigation={this.props.navigation}
@@ -294,7 +322,6 @@ class Chooser extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'rgb(208, 240, 245)',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -331,18 +358,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   gif: {
-    resizeMode: 'stretch',
+    resizeMode: 'cover',
     width: '60%',
     height: '90%',
   },
   icon: {
-    resizeMode: 'stretch',
+    resizeMode: 'cover',
     width: 70,
     height: 70,
   },
 
   bgPicture: {
-    resizeMode: 'stretch',
+    resizeMode: 'cover',
     alignSelf: 'center',
     width: '100%',
     height: '70%',

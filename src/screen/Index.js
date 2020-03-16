@@ -118,12 +118,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   gif: {
-    resizeMode: 'stretch',
+    resizeMode: 'cover',
     width: '100%',
     height: '30%',
   },
   icon: {
-    resizeMode: 'stretch',
+    resizeMode: 'cover',
     width: 50,
     height: 50,
   },

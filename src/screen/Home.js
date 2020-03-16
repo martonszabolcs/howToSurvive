@@ -1,10 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import {Image, Animated, Easing} from 'react-native';
+import {Image, Animated, Easing, ToastAndroid} from 'react-native';
 import Modal from '../components/Modal';
 import {StyleSheet, View, Text, Dimensions, BackHandler} from 'react-native';
 import Header from '../components/Header';
-import { NoFlickerImage } from 'react-native-no-flicker-image';
+import {NoFlickerImage} from 'react-native-no-flicker-image';
 
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 const barWidth = Dimensions.get('screen').width - 80;
@@ -39,32 +39,35 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-		this._toggleSubview();
+    this._toggleSubview();
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-		
-	}
-	handleBackPress = () => {
+  }
+  handleBackPress = () => {
+    ToastAndroid.showWithGravity(
+      "Don't cheat! 🙃",
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER,
+    );
     return true;
   };
   componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
   }
   pressed(type) {
-		if (!this.state.pr){
+    if (!this.state.pr) {
       setTimeout(() => {
         this.setState({modalOpen: true});
       }, 4000);
-  }
+    }
     this.setState({img: type, pr: true});
-    
   }
 
   render() {
-		const images = {
-			tv: {src: require('../../assets/images/tv.png')},
-			porn: {src: require('../../assets/images/porn.png')},
-			titanic: {src: require('../../assets/images/titanic.png')},
-		};
+    const images = {
+      tv: {src: require('../../assets/images/tv.png')},
+      porn: {src: require('../../assets/images/porn.png')},
+      titanic: {src: require('../../assets/images/titanic.png')},
+    };
     const {firstBTN, secondBTN, modalOpen, img} = this.state;
     return (
       <View style={styles.container}>
@@ -179,22 +182,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   gif: {
-    resizeMode: 'stretch',
+    resizeMode: 'cover',
     width: '100%',
+    bottom: -40,
     height: '80%',
     zIndex: -10,
   },
   icon: {
-    resizeMode: 'stretch',
+    resizeMode: 'cover',
     width: 80,
     height: 80,
   },
 
   bgPicture: {
-    resizeMode: 'stretch',
+    resizeMode: 'cover',
     alignSelf: 'center',
     width: '100%',
-    height: '60%',
+    height: '70%',
     zIndex: -1,
     position: 'absolute',
   },
@@ -217,6 +221,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: -2,
+    bottom: 0,
     width: screenWidth,
     height: screenHeight / 2,
   },

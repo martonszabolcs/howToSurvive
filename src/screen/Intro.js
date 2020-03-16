@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Image, Animated} from 'react-native';
 
-import {StyleSheet, View, Text, Dimensions, BackHandler} from 'react-native';
+import {StyleSheet, View, Text, Dimensions, BackHandler, ToastAndroid} from 'react-native';
 import Header from '../components/Header';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 const barWidth = Dimensions.get('screen').width - 80;
@@ -29,6 +29,11 @@ class Intro extends React.Component {
     }).start();
   }
   handleBackPress = () => {
+    ToastAndroid.showWithGravity(
+      "Don't cheat! 🙃",
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER,
+    );
     return true;
   };
 
@@ -85,7 +90,7 @@ class Intro extends React.Component {
               <TouchableWithoutFeedback
                 onPressIn={() => this.setState({firstButton: true})}
                 onPressOut={() => this.setState({firstButton: false})}
-                onPress={() => this.setState({pressedFirst: true})}
+                onPress={() => this.setState({pressedFirst: true, firstButton: true})}
                 style={[styles.button, firstButton ? styles.noshadow : {}]}>
                 <Text
                   style={[
@@ -102,7 +107,7 @@ class Intro extends React.Component {
               <TouchableWithoutFeedback
                 onPressIn={() => this.setState({secondButton: true})}
                 onPressOut={() => this.setState({secondButton: false})}
-                onPressOut={() => this.setState({pressedSecond: true})}
+                onPressOut={() => this.setState({pressedSecond: true, secondButton: true})}
                 style={[styles.button, secondButton ? styles.noshadow : {}]}>
                 <Image
                   style={styles.icon}
@@ -146,14 +151,11 @@ const styles = StyleSheet.create({
     height: screenWidth / 2.5,
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#ddd',
     borderBottomWidth: 0,
     shadowColor: 'gray',
     shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.8,
     shadowRadius: 2,
-    elevation: 1,
     marginLeft: 10,
     marginRight: 10,
     marginTop: 10,

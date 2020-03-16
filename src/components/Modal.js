@@ -33,10 +33,15 @@ class Header extends React.Component {
   onPress = () => {
     const {type, navigation} = this.props;
     this.setState({isModalVisible: false});
+    console.log(this.props)
+      
     if (type === 'flour') navigation.navigate('Die');
     if (type === 'lose') navigation.navigate('Die');
     if (type === 'gohome') navigation.navigate('Home');
-    if (type === 'home') navigation.navigate('Win');
+    if (type === 'home') {
+      navigation.navigate('Win');
+    }
+
   };
 
   render() {
@@ -133,7 +138,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   icon: {
-    resizeMode: 'stretch',
+    resizeMode: 'cover',
     width: screenWidth/2.5,
     height: screenWidth/2.5,
   },

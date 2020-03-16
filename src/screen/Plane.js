@@ -2,7 +2,7 @@
 import * as React from 'react';
 import {Image, Animated, Easing} from 'react-native';
 import Modal from '../components/Modal';
-import {StyleSheet, View, Text, Dimensions,BackHandler} from 'react-native';
+import {StyleSheet, View, Text, Dimensions,BackHandler, ToastAndroid} from 'react-native';
 import Header from '../components/Header';
 import WheelOfFortune from '../components/react-native-wheel-of-fortune';
 
@@ -41,6 +41,11 @@ class Plane extends React.Component {
   }
 
 	handleBackPress = () => {
+		ToastAndroid.showWithGravity(
+      "Don't cheat! 🙃",
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER,
+    );
     return true;
   };
   componentDidMount() {
@@ -202,18 +207,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   gif: {
-    resizeMode: 'stretch',
+    resizeMode: 'cover',
     width: '60%',
     height: '60%',
   },
   icon: {
-    resizeMode: 'stretch',
+    resizeMode: 'cover',
     width: 80,
     height: 80,
   },
 
   bgPicture: {
-    resizeMode: 'stretch',
+    resizeMode: 'cover',
     alignSelf: 'center',
     width: '100%',
     height: '70%',

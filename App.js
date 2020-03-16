@@ -4,7 +4,7 @@ import {Provider} from 'react-redux';
 import {applyMiddleware, createStore} from 'redux';
 import thunk from 'redux-thunk';
 import AppNavigator from './src/Navigator';
-import {SafeAreaView, StyleSheet, StatusBar, BackHandler} from 'react-native';
+import {SafeAreaView, StyleSheet, StatusBar, BackHandler, ToastAndroid} from 'react-native';
 
 import rootReducer from './src/redux/reducers/index';
 const middlewares = [thunk];
@@ -16,6 +16,11 @@ const store = createStoreWithMiddleware(
 
 class App extends Component {
   handleBackPress = () => {
+    ToastAndroid.showWithGravity(
+      "Don't cheat! 🙃",
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER,
+    );
     return true;
   };
   componentDidMount() {

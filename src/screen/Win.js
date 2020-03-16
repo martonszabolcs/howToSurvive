@@ -1,9 +1,7 @@
 import * as React from 'react';
 import {Image, Animated, Easing} from 'react-native';
 
-import {StyleSheet, View, Text, Dimensions} from 'react-native';
-import Header from '../components/Header';
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
+import {StyleSheet, View, Text, Dimensions, BackHandler, ToastAndroid} from 'react-native';
 const barWidth = Dimensions.get('screen').width - 80;
 const screenHeight = Math.round(Dimensions.get('window').height);
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -62,6 +60,19 @@ class Win extends React.Component {
   componentDidMount() {
     this._toggleSubview();
     this.handleAnimation(200);
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+  }
+  handleBackPress = () => {
+		ToastAndroid.showWithGravity(
+      "Don't cheat! 🙃",
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER,
+    );
+    return true;
+  };
+  componentWillUnmount() {
+    clearInterval(this._interval);
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
   }
 
   render() {
@@ -77,65 +88,72 @@ class Win extends React.Component {
         <Text style={styles.text}>SURVIVED</Text>
 
         <View style={styles.content}>
-            <View style={{flex: 1, marginLeft: 20, position: 'absolute', zIndex:2, bottom: 20}}>
-              <Animated.Image
-                style={[
-                  styles.imageLarge,
-                  {
-                    marginLeft: 40,
-                    top: -40,
+          <View
+            style={{
+              flex: 1,
+              marginLeft: 20,
+              position: 'absolute',
+              zIndex: 2,
+              bottom: 20,
+            }}>
+            <Animated.Image
+              style={[
+                styles.imageLarge,
+                {
+                  marginLeft: 40,
+                  top: -40,
 
-                    transform: [
-                      {
-                        rotate: this.animatedValue.interpolate({
-                          inputRange: [-1, 1],
-                          outputRange: ['-0.1rad', '0.1rad'],
-                        }),
-                      },
-                    ],
-                  },
-                ]}
-                source={require('../../assets/images/appleBig.png')}
-              />
-              <Animated.Image
-                style={[
-                  styles.image,
-                  {
-                    left: 20,
-                    top: -20,
-                    transform: [
-                      {
-                        rotate: this.animatedValue.interpolate({
-                          inputRange: [-1, 1],
-                          outputRange: ['-0.1rad', '0.1rad'],
-                        }),
-                      },
-                    ],
-                  },
-                ]}
-                source={require('../../assets/images/apple.png')}
-              />
+                  transform: [
+                    {
+                      rotate: this.animatedValue.interpolate({
+                        inputRange: [-1, 1],
+                        outputRange: ['-0.1rad', '0.1rad'],
+                      }),
+                    },
+                  ],
+                },
+              ]}
+              source={require('../../assets/images/appleBig.png')}
+            />
+            <Animated.Image
+              style={[
+                styles.image,
+                {
+                  left: 20,
+                  top: -20,
+                  transform: [
+                    {
+                      rotate: this.animatedValue.interpolate({
+                        inputRange: [-1, 1],
+                        outputRange: ['-0.1rad', '0.1rad'],
+                      }),
+                    },
+                  ],
+                },
+              ]}
+              source={require('../../assets/images/apple.png')}
+            />
 
-              <Animated.Image
-                style={[
-                  styles.image,
-                  {
-                    height: 20,
-                    width: 20,
-                    transform: [
-                      {
-                        rotate: this.animatedValue.interpolate({
-                          inputRange: [-1, 1],
-                          outputRange: ['-0.1rad', '0.1rad'],
-                        }),
-                      },
-                    ],
-                  },
-                ]}
-                source={require('../../assets/images/apple.png')}
-              />
-            </View>
+            <Animated.Image
+              style={[
+                styles.image,
+                {
+                  height: 20,
+                  width: 20,
+                  transform: [
+                    {
+                      rotate: this.animatedValue.interpolate({
+                        inputRange: [-1, 1],
+                        outputRange: ['-0.1rad', '0.1rad'],
+                      }),
+                    },
+                  ],
+                },
+              ]}
+              source={require('../../assets/images/apple.png')}
+            />
           </View>
+        </View>
       </View>
     );
   }
@@ -192,19 +210,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    resizeMode: 'stretch',
+    resizeMode: 'cover',
     width: 40,
     height: 40,
     zIndex: -1,
   },
   imageLarge: {
-    resizeMode: 'stretch',
-    width: screenWidth/2,
-    height: screenWidth/2,
+    resizeMode: 'cover',
+    width: screenWidth / 2,
+    height: screenWidth / 2,
     zIndex: -1,
   },
   bgPicture: {
-    resizeMode: 'stretch',
+    resizeMode: 'cover',
     alignSelf: 'center',
     width: screenWidth * 1.5,
     height: screenHeight * 1.1,
@@ -214,7 +232,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 50,
     zIndex: 10,
-    marginTop: screenHeight/4,
+    marginTop: screenHeight / 4,
     color: 'black',
     fontFamily: 'Lato-Bold',
   },
