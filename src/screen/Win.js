@@ -1,7 +1,15 @@
 import * as React from 'react';
-import {Image, Animated, Easing} from 'react-native';
 
-import {StyleSheet, View, Text, Dimensions, BackHandler, ToastAndroid} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+  BackHandler,
+  ToastAndroid,
+  Animated,
+  Easing,
+} from 'react-native';
 const barWidth = Dimensions.get('screen').width - 80;
 const screenHeight = Math.round(Dimensions.get('window').height);
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -10,31 +18,26 @@ class Win extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-			bounceValue: new Animated.Value(screenHeight),
-			opacity: 1
+      bounceValue: new Animated.Value(screenHeight),
+      opacity: 1,
     };
     this.animatedValue = new Animated.Value(0);
   }
   handleAnimation = p => {
-    // A loop is needed for continuous animation
     Animated.loop(
-      // Animation consists of a sequence of steps
       Animated.sequence([
-        // start rotation in one direction (only half the time is needed)
         Animated.timing(this.animatedValue, {
           toValue: 1.0,
           duration: p,
           easing: Easing.linear,
           useNativeDriver: true,
         }),
-        // rotate in other direction, to minimum value (= twice the duration of above)
         Animated.timing(this.animatedValue, {
           toValue: -1.0,
           duration: p,
           easing: Easing.linear,
           useNativeDriver: true,
         }),
-        // return to begin position
         Animated.timing(this.animatedValue, {
           toValue: 0.0,
           duration: p,
@@ -47,9 +50,6 @@ class Win extends React.Component {
 
   _toggleSubview() {
     var toValue = -screenHeight / 4;
-
-    //This will animate the transalteY of the subview between 0 & 100 depending on its current state
-    //100 comes from the style below, which is the height of the subview.
     Animated.spring(this.state.bounceValue, {
       toValue: toValue,
       velocity: 0,
@@ -62,7 +62,7 @@ class Win extends React.Component {
     this._toggleSubview();
     this.handleAnimation(200);
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-		setTimeout(() => {
+    setTimeout(() => {
       this._interval = setInterval(() => {
         this.setState({opacity: this.state.opacity - 0.08});
       }, 100);
@@ -71,10 +71,10 @@ class Win extends React.Component {
         this.props.navigation.navigate('End');
       }, 2000);
     }, 2000);
-	}
-	
+  }
+
   handleBackPress = () => {
-		ToastAndroid.showWithGravity(
+    ToastAndroid.showWithGravity(
       "Don't cheat! 🙃",
       ToastAndroid.SHORT,
       ToastAndroid.CENTER,
@@ -92,14 +92,14 @@ class Win extends React.Component {
         <Animated.Image
           style={[
             styles.bgPicture,
-						{opacity: this.state.opacity},
+            {opacity: this.state.opacity},
             {transform: [{translateY: this.state.bounceValue}]},
           ]}
           source={require('../../assets/images/win.png')}
         />
         <Text style={styles.text}>SURVIVED</Text>
 
-        <View style={[styles.content,  {opacity: this.state.opacity}]}>
+        <View style={[styles.content, {opacity: this.state.opacity}]}>
           <View
             style={{
               flex: 1,
@@ -185,41 +185,6 @@ const styles = StyleSheet.create({
     marginTop: screenHeight / 5,
     flex: 1,
     zIndex: 1,
-  },
-  button: {
-    backgroundColor: 'rgb(208, 240, 245)',
-    width: screenWidth / 3.5,
-    borderRadius: 20,
-    height: screenWidth / 2.5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderBottomWidth: 0,
-    shadowColor: 'gray',
-    shadowOffset: {width: 0, height: 4},
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    elevation: 1,
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  noshadow: {
-    borderWidth: 0,
-    borderColor: '#ddd',
-    borderBottomWidth: 0,
-    shadowColor: 'gray',
-    shadowOffset: {width: 0, height: 0},
-    shadowOpacity: 0,
-    shadowRadius: 0,
-    elevation: 0,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   image: {
     resizeMode: 'cover',

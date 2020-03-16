@@ -1,11 +1,12 @@
 import * as React from 'react';
-import {Image, Animated} from 'react-native';
 
 import {
   StyleSheet,
   View,
   Text,
   Dimensions,
+  Image,
+  Animated,
   BackHandler,
   ToastAndroid,
 } from 'react-native';

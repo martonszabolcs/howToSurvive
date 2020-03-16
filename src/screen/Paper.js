@@ -1,8 +1,16 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import {Image, Animated, Easing} from 'react-native';
 import Modal from '../components/Modal';
-import {StyleSheet, View, Text, Dimensions,BackHandler, ToastAndroid} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  BackHandler,
+  ToastAndroid,
+  Image,
+  Animated,
+  Easing,
+} from 'react-native';
 import Header from '../components/Header';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 const barWidth = Dimensions.get('screen').width - 80;
@@ -35,23 +43,19 @@ class Paper extends React.Component {
   handleAnimation = p => {
     // A loop is needed for continuous animation
     Animated.loop(
-      // Animation consists of a sequence of steps
       Animated.sequence([
-        // start rotation in one direction (only half the time is needed)
         Animated.timing(this.animatedValue, {
           toValue: 1.0,
           duration: p,
           easing: Easing.linear,
           useNativeDriver: true,
         }),
-        // rotate in other direction, to minimum value (= twice the duration of above)
         Animated.timing(this.animatedValue, {
           toValue: -1.0,
           duration: p,
           easing: Easing.linear,
           useNativeDriver: true,
         }),
-        // return to begin position
         Animated.timing(this.animatedValue, {
           toValue: 0.0,
           duration: p,
@@ -65,12 +69,10 @@ class Paper extends React.Component {
   componentDidMount() {
     this.handleAnimation(600);
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-
   }
   componentWillUnmount() {
     clearInterval(this._interval);
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
-
   }
   handleBackPress = () => {
     ToastAndroid.showWithGravity(
@@ -228,20 +230,6 @@ const styles = StyleSheet.create({
     top: -screenHeight / 9,
     zIndex: -1,
     position: 'absolute',
-  },
-  text: {
-    fontSize: 16,
-    marginTop: 10,
-    textAlign: 'center',
-    color: 'black',
-    fontFamily: 'Lato-Bold',
-  },
-  grayText: {
-    fontSize: 16,
-    marginTop: 10,
-    textAlign: 'center',
-    color: 'gray',
-    fontFamily: 'Lato-Bold',
   },
   gifContainer: {
     flexDirection: 'row',

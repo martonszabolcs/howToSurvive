@@ -1,8 +1,16 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import {Image, Animated, Easing, ToastAndroid} from 'react-native';
 import Modal from '../components/Modal';
-import {StyleSheet, View, Text, Dimensions, BackHandler} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+  BackHandler,
+  Image,
+  Animated,
+  ToastAndroid,
+} from 'react-native';
 import Header from '../components/Header';
 import {NoFlickerImage} from 'react-native-no-flicker-image';
 
@@ -27,9 +35,6 @@ class Home extends React.Component {
 
   _toggleSubview() {
     var toValue = -screenHeight / 7;
-
-    //This will animate the transalteY of the subview between 0 & 100 depending on its current state
-    //100 comes from the style below, which is the height of the subview.
     Animated.spring(this.state.bounceValue, {
       toValue: toValue,
       velocity: 0,

@@ -2,8 +2,7 @@ import * as React from 'react';
 import {Image} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import FastImage from 'react-native-fast-image'
-
+import FastImage from 'react-native-fast-image';
 
 import {StyleSheet, View, Text, Dimensions} from 'react-native';
 import Header from '../components/Header';
@@ -14,19 +13,29 @@ class Index extends React.Component {
   state = {
     progress: 0,
     opacity: 1,
+    BGopacity: 1,
     firstColor: 0,
     secondColor: 0,
     thirdColor: 0,
+    launch: true,
   };
   componentDidMount() {
     this._interval = setInterval(() => {
       const {
         progress,
         opacity,
+        BGopacity,
         firstColor,
         secondColor,
         thirdColor,
       } = this.state;
+      if (BGopacity > 0) {
+        this.setState({
+          BGopacity: BGopacity - 0.02,
+        });
+      } else {
+        this.setState({launch: false});
+      }
       if (progress < 100) {
         this.setState({
           progress: progress + 1,
@@ -50,58 +59,66 @@ class Index extends React.Component {
   componentWillUnmount() {
     clearInterval(this._interval);
   }
-  addOpacity(rgbString, opacity) {
+  opacity(rgbString, opacity) {
     return rgbString.split(')')[0] + ',' + opacity + ')';
   }
   changeColor() {
-    return (
-      'rgb(' +
-      this.state.firstColor +
-      ', ' +
-      this.state.secondColor +
-      ', ' +
-      this.state.thirdColor +
-      ')'
-    );
+    const {firstColor, secondColor, thirdColor} = this.state;
+    return 'rgb(' + firstColor + ', ' + secondColor + ', ' + thirdColor + ')';
   }
   render() {
     const brandColor = 'rgba(46, 49, 49)';
-    const {opacity, progress} = this.state;
+    const {opacity, BGopacity, progress} = this.state;
     const progressCustomStyles = {
-      backgroundColor: this.addOpacity(brandColor, opacity),
+      backgroundColor: this.opacity(brandColor, opacity),
       borderRadius: 10,
       borderColor: 'transparent',
     };
-    return (
-      <View style={[styles.container, {backgroundColor: this.changeColor()}]}>
-        <Header/>
+    if (this.state.launch) {
+      return (
         <FastImage
-          style={[styles.gif, {opacity: opacity}]}
-          source={require('../../assets/images/hs.gif')}
+          style={{
+            opacity: BGopacity,
+            width: '100%',
+            marginLeft: 10,
+            height: '100%',
+          }}
+          resizeMode="cover"
+          source={require('../../assets/images/launch.png')}
         />
-        {opacity > 0 && (
-          <View>
-            <ProgressBarAnimated
-              width={barWidth}
-              {...progressCustomStyles}
-              value={progress}
-            />
+      );
+    } else {
+      return (
+        <View style={[styles.container, {backgroundColor: this.changeColor()}]}>
+          <Header />
+          <FastImage
+            style={[styles.gif, {opacity: opacity}]}
+            source={require('../../assets/images/hs.gif')}
+          />
+          {opacity > 0 && (
+            <View>
+              <ProgressBarAnimated
+                width={barWidth}
+                {...progressCustomStyles}
+                value={progress}
+              />
 
-            <View style={[styles.content, {opacity: opacity}]}>
-              <Image
-                style={styles.icon}
-                source={require('../../assets/images/bat.png')}
-              />
-              <Text style={styles.text}>{progress + ' %'}</Text>
-              <Image
-                style={styles.icon}
-                source={require('../../assets/images/hand-sanitizer.png')}
-              />
+              <View style={[styles.content, {opacity: opacity}]}>
+                <Image
+                  style={styles.icon}
+                  source={require('../../assets/images/bat.png')}
+                />
+                <Text style={styles.text}>{progress + ' %'}</Text>
+                <Image
+                  style={styles.icon}
+                  source={require('../../assets/images/hand-sanitizer.png')}
+                />
+              </View>
             </View>
-          </View>
-        )}
-      </View>
-    );
+          )}
+        </View>
+      );
+    }
   }
 }
 

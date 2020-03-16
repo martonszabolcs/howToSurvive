@@ -1,6 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import {Image, Animated, Easing} from 'react-native';
 import Modal from '../components/Modal';
 import FastImage from 'react-native-fast-image';
 
@@ -11,6 +10,7 @@ import {
   Dimensions,
   BackHandler,
   ToastAndroid,
+  Image, Animated, Easing
 } from 'react-native';
 import Header from '../components/Header';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
@@ -42,25 +42,20 @@ class Chooser extends React.Component {
   }
 
   handleAnimation = p => {
-    // A loop is needed for continuous animation
     Animated.loop(
-      // Animation consists of a sequence of steps
       Animated.sequence([
-        // start rotation in one direction (only half the time is needed)
         Animated.timing(this.animatedValue, {
           toValue: 1.0,
           duration: p,
           easing: Easing.linear,
           useNativeDriver: true,
         }),
-        // rotate in other direction, to minimum value (= twice the duration of above)
         Animated.timing(this.animatedValue, {
           toValue: -1.0,
           duration: p,
           easing: Easing.linear,
           useNativeDriver: true,
         }),
-        // return to begin position
         Animated.timing(this.animatedValue, {
           toValue: 0.0,
           duration: p,
@@ -129,7 +124,6 @@ class Chooser extends React.Component {
           this.animatedValue.stopAnimation();
 
           clearInterval(this._interval);
-          //this.props.navigation.navigate('Home');
           this.props.navigation.reset({routes: [{name: 'Home'}]});
         }
       }
@@ -374,7 +368,8 @@ const styles = StyleSheet.create({
   },
   gif: {
     resizeMode: 'cover',
-    width: '60%',
+    marginLeft: 40,
+    width: '70%',
     height: '90%',
   },
   gif2: {

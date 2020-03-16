@@ -1,16 +1,13 @@
 import * as React from 'react';
-import {Image, Animated} from 'react-native';
-
 import {
   StyleSheet,
   View,
+  Animated,
   Text,
   Dimensions,
   BackHandler,
   ToastAndroid,
 } from 'react-native';
-import Header from '../components/Header';
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import FastImage from 'react-native-fast-image'
 
 const barWidth = Dimensions.get('screen').width - 80;
@@ -28,9 +25,6 @@ class Die extends React.Component {
 
   _toggleSubview() {
     var toValue = -screenHeight / 4;
-
-    //This will animate the transalteY of the subview between 0 & 100 depending on its current state
-    //100 comes from the style below, which is the height of the subview.
     Animated.spring(this.state.bounceValue, {
       toValue: toValue,
       velocity: 0,
@@ -49,7 +43,6 @@ class Die extends React.Component {
 
   componentWillUnmount() {
     clearInterval(this._interval);
-
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
   }
 
@@ -108,41 +101,6 @@ const styles = StyleSheet.create({
     marginTop: screenHeight / 5,
     flex: 1,
     zIndex: 1,
-  },
-  button: {
-    backgroundColor: 'rgb(208, 240, 245)',
-    width: screenWidth / 3.5,
-    borderRadius: 20,
-    height: screenWidth / 2.5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderBottomWidth: 0,
-    shadowColor: 'gray',
-    shadowOffset: {width: 0, height: 4},
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    elevation: 1,
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  noshadow: {
-    borderWidth: 0,
-    borderColor: '#ddd',
-    borderBottomWidth: 0,
-    shadowColor: 'gray',
-    shadowOffset: {width: 0, height: 0},
-    shadowOpacity: 0,
-    shadowRadius: 0,
-    elevation: 0,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   gif: {
     resizeMode: 'cover',

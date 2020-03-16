@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Image, Animated} from 'react-native';
+import {Animated} from 'react-native';
 
 import {
   StyleSheet,
@@ -9,9 +9,6 @@ import {
   BackHandler,
   ToastAndroid,
 } from 'react-native';
-import Header from '../components/Header';
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
-const barWidth = Dimensions.get('screen').width - 80;
 const screenHeight = Math.round(Dimensions.get('window').height);
 const screenWidth = Math.round(Dimensions.get('window').width);
 
@@ -19,8 +16,8 @@ class End extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-			bounceValue: new Animated.Value(-screenHeight),
-			opacity: 1
+      bounceValue: new Animated.Value(-screenHeight),
+      opacity: 1,
     };
   }
 
@@ -54,7 +51,7 @@ class End extends React.Component {
   componentDidMount() {
     this._toggleSubview();
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-		setTimeout(() => {
+    setTimeout(() => {
       this._interval = setInterval(() => {
         this.setState({opacity: this.state.opacity - 0.08});
       }, 100);
@@ -64,7 +61,7 @@ class End extends React.Component {
         this.props.navigation.navigate('Donate');
       }, 2000);
     }, 2000);
-	}
+  }
 
   render() {
     return (

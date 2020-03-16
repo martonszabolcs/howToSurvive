@@ -8,16 +8,14 @@ import {
   Dimensions,
   BackHandler,
   TouchableOpacity,
-	ToastAndroid,
-	Linking
+  ToastAndroid,
+  Linking,
 } from 'react-native';
 
-import Header from '../components/Header';
-const barWidth = Dimensions.get('screen').width - 80;
 const screenHeight = Math.round(Dimensions.get('window').height);
 const screenWidth = Math.round(Dimensions.get('window').width);
-const donationURL = "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=V7BWUM5M9YKDW&source=url";
-
+const donationURL =
+  'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=V7BWUM5M9YKDW&source=url';
 
 class Donate extends React.Component {
   constructor(props) {
@@ -30,9 +28,6 @@ class Donate extends React.Component {
 
   _toggleSubview() {
     var toValue = 0;
-
-    //This will animate the transalteY of the subview between 0 & 100 depending on its current state
-    //100 comes from the style below, which is the height of the subview.
     Animated.spring(this.state.bounceValue, {
       toValue: toValue,
       velocity: 0,
@@ -50,9 +45,8 @@ class Donate extends React.Component {
   };
 
   componentWillUnmount() {
-		clearInterval(this._interval);
-		this.state.bounceValue.removeAllListeners()
-
+    clearInterval(this._interval);
+    this.state.bounceValue.removeAllListeners();
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
   }
 
@@ -64,10 +58,10 @@ class Donate extends React.Component {
         this.setState({opacity: this.state.opacity + 0.08});
       }, 100);
     }, 1000);
-	}
-	
+  }
 
   render() {
+    const {opacity} = this.state;
     return (
       <View style={styles.container}>
         <Animated.Image
@@ -79,26 +73,33 @@ class Donate extends React.Component {
         />
 
         <Image
-          style={[styles.image, {opacity: this.state.opacity}]}
+          style={[styles.image, {opacity: opacity}]}
           source={require('../../assets/images/me.png')}
         />
-        <Text style={[styles.text, {opacity: this.state.opacity}]}>
+        <Text style={[styles.text, {opacity: opacity}]}>
           So. Thank you for playing HowToSurvive. I’ll be really happy if you
           can donate. It helps to make the new games :)
         </Text>
-        <View style={{flexDirection: 'row', opacity: this.state.opacity}}>
-          <TouchableOpacity onPress={() =>  Linking.openURL(donationURL)} style={styles.button}>
+        <View style={{flexDirection: 'row', opacity: opacity}}>
+          <TouchableOpacity
+            onPress={() => Linking.openURL(donationURL)}
+            style={styles.button}>
             <Text style={[styles.btntext]}>{'DONATE'}</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => alert('jani')} style={styles.button}>
             <Text style={[styles.btntext]}>{'WATCH VIDEO'}</Text>
           </TouchableOpacity>
         </View>
+        <View style={{flexDirection: 'row', opacity: opacity}}>
+
         <TouchableOpacity
-          onPress={() => {this.props.navigation.reset({routes: [{ name: 'Intro' }] })}}
-          style={styles.button2}>
+          onPress={() => {
+            this.props.navigation.reset({routes: [{name: 'Intro'}]});
+          }}
+          style={[styles.button2]}>
           <Text style={[styles.text]}>I DON'T CARE, LET'S PLAY AGAIN!</Text>
         </TouchableOpacity>
+      </View>
       </View>
     );
   }

@@ -2,16 +2,7 @@ import * as React from 'react';
 import {Image, TouchableWithoutFeedback} from 'react-native';
 import Modal from 'react-native-modal';
 
-import {
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Dimensions,
-  Picker,
-  Platform,
-} from 'react-native';
+import {StyleSheet, View, Text, Dimensions} from 'react-native';
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 const images = {
@@ -33,19 +24,16 @@ class Header extends React.Component {
   onPress = () => {
     const {type, navigation} = this.props;
     this.setState({isModalVisible: false});
-    console.log(this.props)
-      
     if (type === 'flour') navigation.navigate('Die');
     if (type === 'lose') navigation.navigate('Die');
     if (type === 'gohome') navigation.navigate('Home');
     if (type === 'home') {
-      navigation.reset({routes: [{ name: 'Home' }] })
+      navigation.reset({routes: [{name: 'Win'}]});
     }
-
   };
 
   render() {
-    const {buttonShadow, pressed} = this.state;
+    const {buttonShadow} = this.state;
     const {type, text, color} = this.props;
     return (
       <View style={{flex: 1}}>
@@ -66,7 +54,7 @@ class Header extends React.Component {
                     style={[
                       styles.button,
                       buttonShadow ? styles.noshadow : {},
-                      color ? {backgroundColor: color} : {}
+                      color ? {backgroundColor: color} : {},
                     ]}>
                     <Image style={styles.icon} source={images[type].src} />
                     <Text style={buttonShadow ? styles.grayText : styles.text}>
@@ -139,8 +127,8 @@ const styles = StyleSheet.create({
   },
   icon: {
     resizeMode: 'cover',
-    width: screenWidth/2.5,
-    height: screenWidth/2.5,
+    width: screenWidth / 2.5,
+    height: screenWidth / 2.5,
   },
   text: {
     fontSize: 25,

@@ -1,8 +1,16 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import {Image, Animated, Easing} from 'react-native';
 import Modal from '../components/Modal';
-import {StyleSheet, View, Text, Dimensions,BackHandler, ToastAndroid} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+  BackHandler,
+  ToastAndroid,
+  Image,
+  Animated,
+} from 'react-native';
 import Header from '../components/Header';
 import WheelOfFortune from '../components/react-native-wheel-of-fortune';
 
@@ -40,8 +48,8 @@ class Plane extends React.Component {
     this.animatedValue = new Animated.Value(0);
   }
 
-	handleBackPress = () => {
-		ToastAndroid.showWithGravity(
+  handleBackPress = () => {
+    ToastAndroid.showWithGravity(
       "Don't cheat! 🙃",
       ToastAndroid.SHORT,
       ToastAndroid.CENTER,

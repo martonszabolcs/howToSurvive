@@ -12,13 +12,14 @@ import Home from './screen/Home';
 import Win from './screen/Win';
 import End from './screen/End';
 import Donate from './screen/Donate';
+import Modal from './components/Modal';
 
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Donate" cardStyle = { {opacity: 1} } headerMode="none">
+      <Stack.Navigator initialRouteName="Index" cardStyle = { {opacity: 1} } headerMode="none">
         <Stack.Screen
           options={{animationEnabled: false, disableBack: true}}
           name="Index"
@@ -68,6 +69,11 @@ const AppNavigator = () => {
           options={{animationEnabled: false}}
           name="Donate"
           component={Donate}
+        />
+        <Stack.Screen
+          options={{animationEnabled: false}}
+          name="Modal"
+          component={Modal}
         />
 
       </Stack.Navigator>
