@@ -2,6 +2,8 @@ import * as React from 'react';
 import {Image} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import FastImage from 'react-native-fast-image'
+
 
 import {StyleSheet, View, Text, Dimensions} from 'react-native';
 import Header from '../components/Header';
@@ -73,7 +75,7 @@ class Index extends React.Component {
     return (
       <View style={[styles.container, {backgroundColor: this.changeColor()}]}>
         <Header/>
-        <Image
+        <FastImage
           style={[styles.gif, {opacity: opacity}]}
           source={require('../../assets/images/hs.gif')}
         />

@@ -1,23 +1,34 @@
 import * as React from 'react';
 import {Image, Animated} from 'react-native';
 
-import {StyleSheet, View, Text, Dimensions, BackHandler, ToastAndroid} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+  BackHandler,
+  ToastAndroid,
+} from 'react-native';
 import Header from '../components/Header';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 const barWidth = Dimensions.get('screen').width - 80;
 const screenHeight = Math.round(Dimensions.get('window').height);
 const screenWidth = Math.round(Dimensions.get('window').width);
+import FastImage from 'react-native-fast-image';
 
 class Intro extends React.Component {
-  state = {
-    bounceValue: new Animated.Value(-screenHeight),
-    showButton: false,
-    firstButton: false,
-    secondButton: false,
-    pressedFirst: false,
-    pressedSecond: false,
-    opacity: 1,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      bounceValue: new Animated.Value(-screenHeight),
+      showButton: false,
+      firstButton: false,
+      secondButton: false,
+      pressedFirst: false,
+      pressedSecond: false,
+      opacity: 1,
+    };
+  }
 
   _toggleSubview() {
     var toValue = -screenHeight / 4;
@@ -39,7 +50,7 @@ class Intro extends React.Component {
 
   componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-    
+
     setTimeout(() => {
       this.setState({showButton: true});
     }, 500);
@@ -66,7 +77,6 @@ class Intro extends React.Component {
   componentWillUnmount() {
     clearInterval(this._interval);
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
-
   }
 
   render() {
@@ -90,7 +100,9 @@ class Intro extends React.Component {
               <TouchableWithoutFeedback
                 onPressIn={() => this.setState({firstButton: true})}
                 onPressOut={() => this.setState({firstButton: false})}
-                onPress={() => this.setState({pressedFirst: true, firstButton: true})}
+                onPress={() =>
+                  this.setState({pressedFirst: true, firstButton: true})
+                }
                 style={[styles.button, firstButton ? styles.noshadow : {}]}>
                 <Text
                   style={[
@@ -107,7 +119,9 @@ class Intro extends React.Component {
               <TouchableWithoutFeedback
                 onPressIn={() => this.setState({secondButton: true})}
                 onPressOut={() => this.setState({secondButton: false})}
-                onPressOut={() => this.setState({pressedSecond: true, secondButton: true})}
+                onPressOut={() =>
+                  this.setState({pressedSecond: true, secondButton: true})
+                }
                 style={[styles.button, secondButton ? styles.noshadow : {}]}>
                 <Image
                   style={styles.icon}
@@ -119,7 +133,7 @@ class Intro extends React.Component {
               </TouchableWithoutFeedback>
             </View>
 
-            <Image
+            <FastImage
               style={styles.gif}
               source={require('../../assets/images/read.gif')}
             />
@@ -177,17 +191,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   gif: {
-    resizeMode: 'stretch',
+    resizeMode: 'cover',
     width: '70%',
     height: '60%',
   },
   icon: {
-    resizeMode: 'stretch',
+    resizeMode: 'cover',
     width: '70%',
     height: '50%',
   },
   bgPicture: {
-    resizeMode: 'stretch',
+    resizeMode: 'cover',
     alignSelf: 'center',
     width: '100%',
     height: '70%',

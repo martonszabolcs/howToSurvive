@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 import Header from '../components/Header';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
+import FastImage from 'react-native-fast-image'
+
 const barWidth = Dimensions.get('screen').width - 80;
 const screenHeight = Math.round(Dimensions.get('window').height);
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -52,18 +54,17 @@ class Die extends React.Component {
   }
 
   componentDidMount() {
+    this._toggleSubview();
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
     setTimeout(() => {
       this._interval = setInterval(() => {
         this.setState({opacity: this.state.opacity - 0.08});
       }, 100);
       setTimeout(() => {
-        this.state.bounceValue.stopAnimation();
         clearInterval(this._intervaal);
         this.props.navigation.navigate('End');
       }, 2000);
     }, 2000);
-    this._toggleSubview();
-    BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
   }
 
   render() {
@@ -82,7 +83,7 @@ class Die extends React.Component {
         <Text style={styles.text}>RIP</Text>
         {this.state.opacity > 0.9 && (
           <View style={[styles.content, {opacity: this.state.opacity}]}>
-            <Image
+            <FastImage
               style={styles.gif}
               source={require('../../assets/images/run.gif')}
             />

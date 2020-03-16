@@ -56,7 +56,7 @@
 		00E356F21AD99517003FC87E /* howToSurviveTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = howToSurviveTests.m; sourceTree = "<group>"; };
 		071DBD8F37708991BF057623 /* Pods-howToSurvive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-howToSurvive.debug.xcconfig"; path = "Target Support Files/Pods-howToSurvive/Pods-howToSurvive.debug.xcconfig"; sourceTree = "<group>"; };
 		0C906765021D485188F644E9 /* Lato-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Light.ttf"; path = "../assets/fonts/Lato-Light.ttf"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* howToSurvive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = howToSurvive.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* HowToSurvive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HowToSurvive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = howToSurvive/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = howToSurvive/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -227,7 +227,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* howToSurvive.app */,
+				13B07F961A680F5B00A75B9A /* HowToSurvive.app */,
 				00E356EE1AD99517003FC87E /* howToSurviveTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* howToSurvive-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* howToSurvive-tvOSTests.xctest */,
@@ -274,7 +274,7 @@
 			);
 			name = howToSurvive;
 			productName = howToSurvive;
-			productReference = 13B07F961A680F5B00A75B9A /* howToSurvive.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* HowToSurvive.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D02E47A1E0B4A5D006451C7 /* howToSurvive-tvOS */ = {
@@ -683,8 +683,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = howToSurvive;
+				PRODUCT_BUNDLE_IDENTIFIER = com.goflamingo.howToSurvive;
+				PRODUCT_NAME = HowToSurvive;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -702,8 +702,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = howToSurvive;
+				PRODUCT_BUNDLE_IDENTIFIER = com.goflamingo.howToSurvive;
+				PRODUCT_NAME = HowToSurvive;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

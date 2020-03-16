@@ -16,6 +16,8 @@ import Header from '../components/Header';
 const barWidth = Dimensions.get('screen').width - 80;
 const screenHeight = Math.round(Dimensions.get('window').height);
 const screenWidth = Math.round(Dimensions.get('window').width);
+const donationURL = "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=V7BWUM5M9YKDW&source=url";
+
 
 class Donate extends React.Component {
   constructor(props) {
@@ -62,7 +64,8 @@ class Donate extends React.Component {
         this.setState({opacity: this.state.opacity + 0.08});
       }, 100);
     }, 1000);
-  }
+	}
+	
 
   render() {
     return (
@@ -83,8 +86,8 @@ class Donate extends React.Component {
           So. Thank you for playing HowToSurvive. I’ll be really happy if you
           can donate. It helps to make the new games :)
         </Text>
-        <View style={{flexDirection: 'row'}}>
-          <TouchableOpacity onPress={() =>  Linking.openURL("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=V7BWUM5M9YKDW&source=url")} style={styles.button}>
+        <View style={{flexDirection: 'row', opacity: this.state.opacity}}>
+          <TouchableOpacity onPress={() =>  Linking.openURL(donationURL)} style={styles.button}>
             <Text style={[styles.btntext]}>{'DONATE'}</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => alert('jani')} style={styles.button}>
@@ -92,7 +95,7 @@ class Donate extends React.Component {
           </TouchableOpacity>
         </View>
         <TouchableOpacity
-          onPress={() => this.props.navigation.push('Intro')}
+          onPress={() => {this.props.navigation.reset({routes: [{ name: 'Intro' }] })}}
           style={styles.button2}>
           <Text style={[styles.text]}>I DON'T CARE, LET'S PLAY AGAIN!</Text>
         </TouchableOpacity>
@@ -126,17 +129,11 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    zIndex: 10,
-    marginTop: 60,
-    top: -30,
     color: 'black',
     fontFamily: 'Lato-Bold',
   },
   btntext: {
     fontSize: 14,
-    zIndex: 10,
-    marginTop: 60,
-    top: -30,
     color: 'black',
     fontFamily: 'Lato-Bold',
   },

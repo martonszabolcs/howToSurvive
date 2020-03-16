@@ -18,7 +18,7 @@ const Stack = createStackNavigator();
 const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Index" cardStyle = { {opacity: 1} } headerMode="none">
+      <Stack.Navigator initialRouteName="Donate" cardStyle = { {opacity: 1} } headerMode="none">
         <Stack.Screen
           options={{animationEnabled: false, disableBack: true}}
           name="Index"

@@ -2,8 +2,16 @@
 import * as React from 'react';
 import {Image, Animated, Easing} from 'react-native';
 import Modal from '../components/Modal';
+import FastImage from 'react-native-fast-image';
 
-import {StyleSheet, View, Text, Dimensions, BackHandler,ToastAndroid} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+  BackHandler,
+  ToastAndroid,
+} from 'react-native';
 import Header from '../components/Header';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 const barWidth = Dimensions.get('screen').width - 80;
@@ -81,7 +89,7 @@ class Chooser extends React.Component {
         virus: true,
       });
       this.handleAnimation(600);
-    }, 5000);
+    }, 6000);
     this._interval = setInterval(() => {
       const {
         pressedFirst,
@@ -119,8 +127,10 @@ class Chooser extends React.Component {
           });
         } else {
           this.animatedValue.stopAnimation();
-          clearInterval(this._intervaal);
-          this.props.navigation.navigate('Home');
+
+          clearInterval(this._interval);
+          //this.props.navigation.navigate('Home');
+          this.props.navigation.reset({routes: [{name: 'Home'}]});
         }
       }
     }, 50);
@@ -143,6 +153,8 @@ class Chooser extends React.Component {
   }
 
   render() {
+    console.log(this.state.bounceValue);
+
     const {firstBTN, secondBTN, thirdBTN, forthBTN, modalOpen} = this.state;
     return (
       <View style={[styles.container, {backgroundColor: this.changeColor()}]}>
@@ -276,9 +288,9 @@ class Chooser extends React.Component {
                 source={require('../../assets/images/bacteria.png')}
               />
             </View>
-            <Animated.Image
+            <Animated.View
               style={[
-                styles.gif,
+                styles.gif2,
                 this.state.virus
                   ? {
                       transform: [
@@ -291,9 +303,12 @@ class Chooser extends React.Component {
                       ],
                     }
                   : {},
-              ]}
-              source={require('../../assets/images/run.gif')}
-            />
+              ]}>
+              <FastImage
+                style={styles.gif}
+                source={require('../../assets/images/run.gif')}
+              />
+            </Animated.View>
             {this.state.virus && (
               <Animated.Image
                 style={[
@@ -361,6 +376,10 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     width: '60%',
     height: '90%',
+  },
+  gif2: {
+    width: '80%',
+    height: '100%',
   },
   icon: {
     resizeMode: 'cover',

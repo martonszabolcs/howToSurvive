@@ -10,7 +10,8 @@ class Win extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bounceValue: new Animated.Value(screenHeight),
+			bounceValue: new Animated.Value(screenHeight),
+			opacity: 1
     };
     this.animatedValue = new Animated.Value(0);
   }
@@ -61,7 +62,17 @@ class Win extends React.Component {
     this._toggleSubview();
     this.handleAnimation(200);
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-  }
+		setTimeout(() => {
+      this._interval = setInterval(() => {
+        this.setState({opacity: this.state.opacity - 0.08});
+      }, 100);
+      setTimeout(() => {
+        clearInterval(this._intervaal);
+        this.props.navigation.navigate('End');
+      }, 2000);
+    }, 2000);
+	}
+	
   handleBackPress = () => {
 		ToastAndroid.showWithGravity(
       "Don't cheat! 🙃",
@@ -77,17 +88,18 @@ class Win extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container]}>
         <Animated.Image
           style={[
             styles.bgPicture,
+						{opacity: this.state.opacity},
             {transform: [{translateY: this.state.bounceValue}]},
           ]}
           source={require('../../assets/images/win.png')}
         />
         <Text style={styles.text}>SURVIVED</Text>
 
-        <View style={styles.content}>
+        <View style={[styles.content,  {opacity: this.state.opacity}]}>
           <View
             style={{
               flex: 1,

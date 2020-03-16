@@ -39,7 +39,7 @@ class Header extends React.Component {
     if (type === 'lose') navigation.navigate('Die');
     if (type === 'gohome') navigation.navigate('Home');
     if (type === 'home') {
-      navigation.navigate('Win');
+      navigation.reset({routes: [{ name: 'Home' }] })
     }
 
   };
