@@ -1,4 +1,4 @@
-package com.howtosurvive;
+package com.goflamingo.howtosurvivenow;
 
 import com.facebook.react.ReactActivity;
 

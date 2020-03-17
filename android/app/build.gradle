@@ -128,7 +128,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.howtosurvive"
+        applicationId "com.goflamingo.howtosurvivenow"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 3

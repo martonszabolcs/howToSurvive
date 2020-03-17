@@ -1,4 +1,4 @@
-package com.howtosurvive;
+package com.goflamingo.howtosurvivenow;
 
 import android.app.Application;
 import android.content.Context;
