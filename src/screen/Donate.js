@@ -91,15 +91,14 @@ class Donate extends React.Component {
           </TouchableOpacity>
         </View>
         <View style={{flexDirection: 'row', opacity: opacity}}>
-
-        <TouchableOpacity
-          onPress={() => {
-            this.props.navigation.reset({routes: [{name: 'Intro'}]});
-          }}
-          style={[styles.button2]}>
-          <Text style={[styles.text]}>I DON'T CARE, LET'S PLAY AGAIN!</Text>
-        </TouchableOpacity>
-      </View>
+          <TouchableOpacity
+            onPress={() => {
+              this.props.navigation.reset({routes: [{name: 'Intro'}]});
+            }}
+            style={[styles.button2]}>
+            <Text style={[styles.text]}>I DON'T CARE, LET'S PLAY AGAIN!</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
