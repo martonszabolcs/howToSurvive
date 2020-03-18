@@ -305,7 +305,7 @@ class WheelOfFortune extends Component {
             <View style={styles.container}>
 
                 { /** SVG WHEEL  */}
-                <TouchableWithoutFeedback style={{ position: 'absolute', width: width, height: height / 2, justifyContent: 'center', alignItems: 'center' }}>
+                <TouchableWithoutFeedback style={{ position: 'absolute', width: width-80, height: width-80, justifyContent: 'center', alignItems: 'center' }}>
                     <Animated.View style={[styles.content, { padding: 10 }]}>
                         {this._renderSvgWheel()}
                     </Animated.View>

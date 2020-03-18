@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
     zIndex: -1,
   },
   bgPicture: {
-    resizeMode: 'cover',
+    resizeMode: 'stretch',
     alignSelf: 'center',
     width: screenWidth * 1.5,
     height: screenHeight * 1.1,

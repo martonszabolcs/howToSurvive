@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   gif: {
-    resizeMode: 'cover',
+    resizeMode: 'stretch',
     width: '60%',
     height: '60%',
   },

@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   text: {
-    fontSize: screenHeight / 11,
+    fontSize: screenHeight / 12,
     zIndex: 10,
     marginTop: 60,
     color: 'black',

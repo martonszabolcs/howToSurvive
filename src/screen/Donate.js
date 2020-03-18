@@ -14,8 +14,6 @@ import {
 
 const screenHeight = Math.round(Dimensions.get('window').height);
 const screenWidth = Math.round(Dimensions.get('window').width);
-const donationURL =
-  'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=V7BWUM5M9YKDW&source=url';
 
 class Donate extends React.Component {
   constructor(props) {
@@ -77,17 +75,14 @@ class Donate extends React.Component {
           source={require('../../assets/images/me.png')}
         />
         <Text style={[styles.text, {opacity: opacity}]}>
-          So. Thank you for playing HowToSurvive. I’ll be really happy if you
-          can donate. It helps to make the new games :)
+          So.Thank you for playing HowToSurvive. Feel free to contact me, if you
+          have a response, or you have an idea, or you want to donate.
         </Text>
         <View style={{flexDirection: 'row', opacity: opacity}}>
           <TouchableOpacity
-            onPress={() => Linking.openURL(donationURL)}
+            onPress={() => Linking.openURL('mailto:hello@martonszabolcs.hu')}
             style={styles.button}>
-            <Text style={[styles.btntext]}>{'DONATE'}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => alert('jani')} style={styles.button}>
-            <Text style={[styles.btntext]}>{'WATCH VIDEO'}</Text>
+            <Text style={[styles.btntext]}>{'Contact'}</Text>
           </TouchableOpacity>
         </View>
         <View style={{flexDirection: 'row', opacity: opacity}}>

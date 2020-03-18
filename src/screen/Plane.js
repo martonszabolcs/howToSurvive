@@ -253,6 +253,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: screenWidth,
+    top: -screenHeight/20,
     height: screenHeight / 2,
   },
 });
