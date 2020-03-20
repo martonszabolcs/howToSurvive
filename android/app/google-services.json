@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "789330215039",
+    "firebase_url": "https://howtosurvive-ca26e.firebaseio.com",
+    "project_id": "howtosurvive-ca26e",
+    "storage_bucket": "howtosurvive-ca26e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789330215039:android:c5b22b70a6dfc4eb05ff4a",
+        "android_client_info": {
+          "package_name": "com.goflamingo.howtosurvivenow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "789330215039-hc4btsm8ugihnve0cpf6lt05t125saoi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEzFOSGhR57AKaaal0b_mv6cBvZ56qzIU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "789330215039-hc4btsm8ugihnve0cpf6lt05t125saoi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

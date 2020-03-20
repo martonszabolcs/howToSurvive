@@ -30,6 +30,7 @@
 		C2648E31C95B4E488C742935 /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F19C0776248444DBFAFC822 /* Lato-LightItalic.ttf */; };
 		CDA472763D0749DBA45CD356 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20E28F72869B4959AFB6F0D1 /* Lato-Italic.ttf */; };
 		DACA38DD31614D4E82BF3819 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C906765021D485188F644E9 /* Lato-Light.ttf */; };
+		EE323A7424250D5D00E3025E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE323A7324250D5D00E3025E /* GoogleService-Info.plist */; };
 		EEFCAEA5241FC2C300C2FBC2 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEFCAEA4241FC2C300C2FBC2 /* Launch Screen.storyboard */; };
 		EEFCAEA9241FC3F400C2FBC2 /* LaunchImage-828@2x~iphoneXr-portrait_828x1792.png in Resources */ = {isa = PBXBuildFile; fileRef = EEFCAEA8241FC3F400C2FBC2 /* LaunchImage-828@2x~iphoneXr-portrait_828x1792.png */; };
 /* End PBXBuildFile section */
@@ -88,6 +89,7 @@
 		E51C2E155C5C85BF0596480F /* libPods-howToSurvive-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-howToSurvive-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		EE323A7324250D5D00E3025E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EEFCAEA4241FC2C300C2FBC2 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		EEFCAEA8241FC3F400C2FBC2 /* LaunchImage-828@2x~iphoneXr-portrait_828x1792.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage-828@2x~iphoneXr-portrait_828x1792.png"; sourceTree = "<group>"; };
 		F9D59D26F4D34E34A93B943D /* Lato-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Lato-Bold.ttf"; path = "../assets/fonts/Lato-Bold.ttf"; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
+				EE323A7324250D5D00E3025E /* GoogleService-Info.plist */,
 				EEFCAEA8241FC3F400C2FBC2 /* LaunchImage-828@2x~iphoneXr-portrait_828x1792.png */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				EEFCAEA4241FC2C300C2FBC2 /* Launch Screen.storyboard */,
@@ -392,6 +395,7 @@
 				8CB5083335B04AB5A8737497 /* Lato-BoldItalic.ttf in Resources */,
 				CDA472763D0749DBA45CD356 /* Lato-Italic.ttf in Resources */,
 				DACA38DD31614D4E82BF3819 /* Lato-Light.ttf in Resources */,
+				EE323A7424250D5D00E3025E /* GoogleService-Info.plist in Resources */,
 				C2648E31C95B4E488C742935 /* Lato-LightItalic.ttf in Resources */,
 				EEFCAEA9241FC3F400C2FBC2 /* LaunchImage-828@2x~iphoneXr-portrait_828x1792.png in Resources */,
 				86EB3175D82748168BF425B9 /* Lato-Regular.ttf in Resources */,
@@ -685,11 +689,12 @@
 			baseConfigurationReference = 071DBD8F37708991BF057623 /* Pods-howToSurvive.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = KAQ98QY2KR;
 				INFOPLIST_FILE = howToSurvive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -706,10 +711,11 @@
 			baseConfigurationReference = 1D59D976B09EA14174948FC4 /* Pods-howToSurvive.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = KAQ98QY2KR;
 				INFOPLIST_FILE = howToSurvive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

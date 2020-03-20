@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import FastImage from 'react-native-fast-image';
 
+
 import {StyleSheet, View, Text, Dimensions, Platform} from 'react-native';
 import Header from '../components/Header';
 import ProgressBarAnimated from 'react-native-progress-bar-animated';
