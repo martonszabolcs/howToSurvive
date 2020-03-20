@@ -7,6 +7,7 @@ import {
   Dimensions,
   BackHandler,
   ToastAndroid,
+  Platform
 } from 'react-native';
 import FastImage from 'react-native-fast-image'
 
@@ -71,7 +72,7 @@ class Die extends React.Component {
               transform: [{translateY: this.state.bounceValue}],
             },
           ]}
-          source={require('../../assets/images/die.png')}
+          source={Platform.OS === 'android' ? require('../../assets/images/die.png') : require('../../assets/images/Vector.png')}
         />
         <Text style={styles.text}>RIP</Text>
         {this.state.opacity > 0.9 && (

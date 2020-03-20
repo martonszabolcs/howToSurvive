@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import FastImage from 'react-native-fast-image';
 
-import {StyleSheet, View, Text, Dimensions} from 'react-native';
+import {StyleSheet, View, Text, Dimensions, Platform} from 'react-native';
 import Header from '../components/Header';
 import ProgressBarAnimated from 'react-native-progress-bar-animated';
 const barWidth = Dimensions.get('screen').width - 80;
@@ -17,7 +17,7 @@ class Index extends React.Component {
     firstColor: 0,
     secondColor: 0,
     thirdColor: 0,
-    launch: true,
+    launch: Platform.OS === 'android' ? true : false,
   };
   componentDidMount() {
     this._interval = setInterval(() => {
@@ -102,18 +102,19 @@ class Index extends React.Component {
                 {...progressCustomStyles}
                 value={progress}
               />
-
-              <View style={[styles.content, {opacity: opacity}]}>
-                <Image
-                  style={styles.icon}
-                  source={require('../../assets/images/bat.png')}
-                />
-                <Text style={styles.text}>{progress + ' %'}</Text>
-                <Image
-                  style={styles.icon}
-                  source={require('../../assets/images/hand-sanitizer.png')}
-                />
-              </View>
+              {Platform.OS === 'android' && (
+                <View style={[styles.content, {opacity: opacity}]}>
+                  <Image
+                    style={styles.icon}
+                    source={require('../../assets/images/bat.png')}
+                  />
+                  <Text style={styles.text}>{progress + ' %'}</Text>
+                  <Image
+                    style={styles.icon}
+                    source={require('../../assets/images/hand-sanitizer.png')}
+                  />
+                </View>
+              )}
             </View>
           )}
         </View>

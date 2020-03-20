@@ -10,7 +10,10 @@ import {
   Dimensions,
   BackHandler,
   ToastAndroid,
-  Image, Animated, Easing
+  Image,
+  Animated,
+  Easing,
+  Platform,
 } from 'react-native';
 import Header from '../components/Header';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
@@ -242,7 +245,7 @@ class Chooser extends React.Component {
                     ],
                   },
                 ]}
-                source={require('../../assets/images/bacteria.png')}
+                source={Platform.OS === 'android' ? require('../../assets/images/bacteria.png') : require('../../assets/images/apple.png')}
               />
               <Animated.Image
                 style={[
@@ -260,7 +263,7 @@ class Chooser extends React.Component {
                     ],
                   },
                 ]}
-                source={require('../../assets/images/bacteria.png')}
+                source={Platform.OS === 'android' ? require('../../assets/images/bacteria.png') : require('../../assets/images/apple.png')}
               />
 
               <Animated.Image
@@ -279,7 +282,7 @@ class Chooser extends React.Component {
                     ],
                   },
                 ]}
-                source={require('../../assets/images/bacteria.png')}
+                source={Platform.OS === 'android' ? require('../../assets/images/bacteria.png') : require('../../assets/images/apple.png')}
               />
             </View>
             <Animated.View
@@ -319,7 +322,7 @@ class Chooser extends React.Component {
                     ],
                   },
                 ]}
-                source={require('../../assets/images/bacteria.png')}
+                source={Platform.OS === 'android' ? require('../../assets/images/bacteria.png') : require('../../assets/images/apple.png')}
               />
             )}
           </View>

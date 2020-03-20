@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Image} from 'react-native';
+import {Image, Platform} from 'react-native';
 
 import {StyleSheet, View, Text, Dimensions} from 'react-native';
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -23,11 +23,20 @@ class Header extends React.Component {
         <View style={styles.content}>
           <Image
             style={styles.image}
-            source={require('../../assets/images/bacteria.png')}
+            source={
+              Platform.OS === 'android'
+                ? require('../../assets/images/bacteria.png')
+                : require('../../assets/images/apple.png')
+            }
           />
-          <Text style={styles.text}>
-            {'How to survive'} {'\n'} {'a virus'}
-          </Text>
+          {Platform.OS === 'android' && (
+            <Text style={styles.text}>
+              {'How to survive'} {'\n'} {'a virus'}
+            </Text>
+          )}
+          {Platform.OS === 'ios' && (
+            <Text style={styles.text}>{'How to survive'}</Text>
+          )}
         </View>
       </View>
     );

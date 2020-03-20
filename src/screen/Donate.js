@@ -76,7 +76,7 @@ class Donate extends React.Component {
         />
         <Text style={[styles.text, {opacity: opacity}]}>
           So.Thank you for playing HowToSurvive. Feel free to contact me, if you
-          have a response, or you have an idea, or you want to donate.
+          have a response, or you have an idea.
         </Text>
         <View style={{flexDirection: 'row', opacity: opacity}}>
           <TouchableOpacity
